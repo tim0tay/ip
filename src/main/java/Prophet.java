@@ -20,6 +20,8 @@ public class Prophet {
                 this.addDeadline(str);
             } else if (str.toLowerCase().startsWith("event")) {
                 this.addEvent(str);
+            } else if (str.toLowerCase().startsWith("delete")) {
+                this.deleteTask(str);
             } else {
                 throw new UnrecognisedCommandException();
             }
@@ -47,7 +49,7 @@ public class Prophet {
             if (mark.length < 2 || mark[1].isEmpty()) {
                 throw new InvalidTaskNumberException();
             }
-            String marked = this.tasks.markDone(Integer.parseInt(mark[1]));
+            String marked = this.tasks.markDone(Integer.parseInt(mark[1]) - 1);
             System.out.println(horizontalLine + marked + "\n" + horizontalLine);
         } catch (NumberFormatException e) {
             System.out.println("The number you keyed in was not an integer! Try again.");
@@ -65,7 +67,7 @@ public class Prophet {
             if (unmark.length < 2 || unmark[1].isEmpty()) {
                 throw new InvalidTaskNumberException();
             }
-            String marked = this.tasks.markNotDone(Integer.parseInt(unmark[1]));
+            String marked = this.tasks.markNotDone(Integer.parseInt(unmark[1]) - 1);
             System.out.println(horizontalLine + marked + "\n" + horizontalLine);
         } catch (NumberFormatException e) {
             System.out.println("The number you keyed in was not an integer! Try again.");
@@ -133,6 +135,24 @@ public class Prophet {
         Event newTask = new Event(remainingParts[0], timeline[0], timeline[1]);
         String added = tasks.addToList(newTask);
         System.out.println(horizontalLine + added + "\n" + horizontalLine);
+    }
+
+    /**
+     * Mark a specific task as done.
+     * @param str string that represents the task number, to be converted into an integer.
+     *            The string must contain the exact integer alone
+     */
+    public void deleteTask(String str) throws InvalidTaskNumberException {
+        try {
+            String[] delete = str.split("delete ", 2);
+            if (delete.length < 2 || delete[1].isEmpty()) {
+                throw new InvalidTaskNumberException();
+            }
+            String deleted = this.tasks.deleteTask(Integer.parseInt(delete[1]) - 1);
+            System.out.println(horizontalLine + deleted + "\n" + horizontalLine);
+        } catch (NumberFormatException e) {
+            System.out.println("The number you keyed in was not an integer! Try again.");
+        }
     }
 
     public static void main(String[] args) {

@@ -41,8 +41,8 @@ public class TodoList {
      * @param taskNumber the task to be marked done
      * @return the string that confirms successful marking of the task
      */
-    public String markDone(Integer taskNumber) {
-        if (taskNumber == null || taskNumber >= this.list.size() || taskNumber < 0) {
+    public String markDone(int taskNumber) {
+        if (taskNumber >= this.list.size() || taskNumber < 0) {
             return "This task number can't be found! Please enter a valid task number.\n";
         }
         this.list.get(taskNumber).markDone();
@@ -57,7 +57,7 @@ public class TodoList {
      * @param taskNumber the task to be marked not done
      * @return the string that confirms successful marking of the task
      */
-    public String markNotDone(Integer taskNumber) {
+    public String markNotDone(int taskNumber) {
         if (taskNumber >= this.list.size() || taskNumber < 0) {
             return "This task number can't be found! Please enter a valid task number.\n";
         }
@@ -65,6 +65,23 @@ public class TodoList {
         StringBuilder result = new StringBuilder("Marked not done! Jiayous...\n");
         result.append(this.list.get(taskNumber).getStatusIcon())
                 .append(this.list.get(taskNumber).getTaskDescription()).append("\n");
+        return result.toString();
+    }
+
+    /**
+     * Removes the input task from the list of things to do.
+     * @param  taskNumber the task description
+     * @return the confirmation string that indicates successful removal
+     */
+    public String deleteTask(int taskNumber) {
+        if (taskNumber >= this.list.size() || taskNumber < 0) {
+            return "This task number can't be found! Please enter a valid task number.\n";
+        }
+        Task task = this.list.get(taskNumber);
+        this.list.remove(taskNumber);
+        StringBuilder result = new StringBuilder("The following task was removed: \n");
+        result.append(task.getStatusIcon())
+                .append(task.getTaskDescription()).append("\n");
         return result.toString();
     }
 }
