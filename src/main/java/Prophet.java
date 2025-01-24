@@ -56,13 +56,13 @@ public class Prophet {
                     break;
                 }
                 // splits description and timeline up
-                String[] remainingParts = description[1].split("/from",2);
+                String[] remainingParts = description[1].split("/from ",2);
                 if (remainingParts.length < 2) {
                     System.out.println("Please type a proper format..!\n");
                     break;
                 }
                 // splits timeline up
-                String[] timeline = remainingParts[1].split("/to",2);
+                String[] timeline = remainingParts[1].split("/to ",2);
                 if (timeline.length < 2) {
                     System.out.println("Please type a proper format..!\n");
                     break;
