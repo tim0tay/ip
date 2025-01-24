@@ -13,6 +13,12 @@ public class Prophet {
             if (str.equalsIgnoreCase("list")) {
                 String list = tasks.enumerateList();
                 System.out.println(horizontalLine + list + "\n" + horizontalLine);
+            } else if (str.toLowerCase().startsWith("mark")) {
+                String marked = tasks.markDone(Integer.parseInt(str.substring(5)) - 1);
+                System.out.println(horizontalLine + marked + "\n" + horizontalLine);
+            } else if (str.toLowerCase().startsWith("unmark")) {
+                String unmarked = tasks.markNotDone(Integer.parseInt(str.substring(7)) - 1);
+                System.out.println(horizontalLine + unmarked + "\n" + horizontalLine);
             } else {
                 String added = tasks.addToList(str);
                 System.out.println(horizontalLine + added + "\n" + horizontalLine);
