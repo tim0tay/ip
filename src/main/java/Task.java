@@ -35,4 +35,12 @@ public class Task {
     public void markNotDone() {
         this.isDone = false;
     }
+
+    /**
+     * Returns a string representation of the task's description.
+     * @return the string that represents the task description
+     */
+    public String toString() {
+        return this.getStatusIcon() + this.description;
+    }
 }

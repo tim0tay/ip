@@ -9,16 +9,15 @@ public class TodoList {
 
     /**
      * Adds the input task to the list of things to do.
-     * @param  todo the task description
+     * @param  newTask the task description
      * @return the confirmation string that indicates successful addition
      */
-    public String addToList(String todo) {
-        if (todo == null || todo.isEmpty()) {
+    public String addToList(Task newTask) {
+        if (newTask == null) {
             return "Please.. don't make me work harder than I have to!\n";
         }
-        Task newTask = new Task(todo);
         this.list.add(newTask);
-        return "Task added to list: " + todo;
+        return "Task added to list: " + newTask.toString();
     }
 
     /**
@@ -28,8 +27,7 @@ public class TodoList {
     public String enumerateList() {
         StringBuilder result = new StringBuilder("Let's see what you have on your plate:\n");
         for (int i = 0; i < this.list.size(); i++) {
-            result.append(i+1).append(". ").append(this.list.get(i).getStatusIcon())
-                    .append(this.list.get(i).getTaskDescription()).append("\n");
+            result.append(i+1).append(". ").append(this.list.get(i).toString());
         }
         if (this.list.isEmpty()) {
             result.append("So gewd ah.. nothing to do!\n");
