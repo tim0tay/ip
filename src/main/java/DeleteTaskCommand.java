@@ -17,11 +17,13 @@ public class DeleteTaskCommand extends Command {
 
     /**
      * Deletes a specific task.
+     * Prints out the confirmation message or the error message.
+     * @param ui the user interface of the chatbot
      * @param storage the storage of tasks accumulated as the chatbot runs
      */
     @Override
-    public void execute(Storage storage) throws InvalidTaskNumberException {
+    public void execute(Ui ui, Storage storage) throws InvalidTaskNumberException {
         String deleted = storage.deleteTask(this.index);
-        System.out.println(horizontalLine + deleted + "\n" + horizontalLine);
+        ui.print(horizontalLine + deleted + "\n" + horizontalLine);
     }
 }

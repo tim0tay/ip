@@ -1,11 +1,11 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 public class Prophet {
     /**
      * The Prophet class is the main class that runs the chatbot.
      */
 
-    private static final String horizontalLine = "--------------------------------------------------------------------------------\n";
+    private static final String horizontalLine = "-----------------------------------" +
+            "---------------------------------------------\n";
     private static Storage storage;
 
     /**
@@ -18,26 +18,24 @@ public class Prophet {
 
     public static void main(String[] args) {
         Prophet.storage = new Storage();
-        Save.load(Prophet.storage);
-        System.out.println(horizontalLine
-                + "Hi! Welcome to the Daily Prophet! You can call me Prophet for short.\n"
-                + "For now, I can keep track of your tasks. What would you like to remember?\n"
-                + horizontalLine);
-        Scanner sc = new Scanner(System.in);
-        String str = sc.nextLine();
+        Ui ui = new Ui();
+        Save.load(ui, Prophet.storage);
+        Ui.greet();
+        String str = ui.run();
         while (!str.equalsIgnoreCase("bye")) {
             try {
-                ArrayList<Command> command = Parser.parse(str);
+                ArrayList<Command> command = Parser.parse(ui, str);
                 for (Command c : command) {
-                    c.execute(Prophet.storage);
+                    c.execute(ui, Prophet.storage);
                 }
             } catch (ProphetException e) {
                 System.out.println(e);
-            } finally {
-                str = sc.nextLine();
+            }
+            finally {
+                str = ui.run();
             }
         }
-        Save.save(Prophet.storage);
-        System.out.println(horizontalLine + "Bye! Hope to see you again!\n" + horizontalLine);
+        Ui.bye();
+        Save.save(ui, Prophet.storage);
     }
 }

@@ -17,12 +17,14 @@ public class AddToDoCommand extends Command {
 
     /**
      * Adds a to-do task to the list of tasks.
+     * Prints out the confirmation message or the error message.
+     * @param ui the user interface of the chatbot
      * @param storage the storage of tasks accumulated as the chatbot runs
      */
     @Override
-    public void execute(Storage storage) {
+    public void execute(Ui ui, Storage storage) {
         ToDoTask newTask = new ToDoTask(this.taskDescription);
         String added = storage.addToList(newTask);
-        System.out.println(horizontalLine + added + "\n" + horizontalLine);
+        ui.print(horizontalLine + added + "\n" + horizontalLine);
     }
 }

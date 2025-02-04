@@ -15,7 +15,7 @@ public class Save {
      * Saves the tasks to a file.
      * @param storage the storage of tasks accumulated as the chatbot runs
      */
-    public static void save(Storage storage) {
+    public static void save(Ui ui, Storage storage) {
         try {
             File filePath = new File(FILE_PATH);
             if (!filePath.exists()) {
@@ -29,14 +29,14 @@ public class Save {
             writer.write(storage.enumerateSaveList());
             writer.close();
         } catch (IOException e) {
-            System.out.println("An error occurred while saving the tasks: " + e.getMessage());
+            ui.print("An error occurred while saving the tasks: " + e.getMessage());
         }
     }
 
     /**
      * Loads the tasks from a file into the storage of tasks.
      */
-    public static void load(Storage storage) {
+    public static void load(Ui ui, Storage storage) {
         try {
             File saveFile = new File(SAVE_PATH);
             if (!saveFile.exists()) {
@@ -45,13 +45,13 @@ public class Save {
             Scanner sc = new Scanner(saveFile);
             while (sc.hasNextLine()) {
                 String task = sc.nextLine();
-                ArrayList<Command> loadedCommands = Parser.parse(task);
+                ArrayList<Command> loadedCommands = Parser.parse(ui, task);
                 for (Command command : loadedCommands) {
-                    command.execute(storage);
+                    command.execute(ui, storage);
                 }
             }
         } catch (IOException | InvalidTaskNumberException | NoDescriptionException e) {
-            System.out.println("An error occurred while loading the tasks: " + e.getMessage());
+            ui.print("An error occurred while loading the tasks: " + e.getMessage());
         }
     }
 }
