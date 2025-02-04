@@ -1,0 +1,185 @@
+import java.util.ArrayList;
+
+public class Parser {
+    /**
+     * The Parser class takes in user input and interprets it to perform the necessary actions.
+     */
+    private static final String horizontalLine = "--------------------------------------------------------------------------------\n";
+
+    /**
+     * Interprets command-line inputs and returns the command type according to keywords.
+     * @param str the string representing the input
+     * @return CommandType the type of command given in the input
+     */
+    public static ArrayList<Command> parse(String str) throws InvalidTaskNumberException, NoDescriptionException {
+        // read first word of string
+        // if first word is in commandtype, parse further for args
+        String firstWord = str.split(" ", 2)[0].toLowerCase();
+        ArrayList<Command> commands = new ArrayList<>();
+        switch (firstWord) {
+        case "list":
+            commands.add(new ListCommand(CommandType.LIST));
+            return commands;
+        case "mark":
+            try {
+                String[] mark = str.split("mark ", 2);
+                if (mark.length < 2 || mark[1].isEmpty()) {
+                    throw new InvalidTaskNumberException();
+                }
+                int index = Integer.parseInt(mark[1]) - 1;
+                commands.add(new MarkCommand(CommandType.MARK, index));
+                return commands;
+            } catch (NumberFormatException e) {
+                System.out.println("The number you keyed in was not an integer! Try again.");
+            }
+        case "unmark":
+            try {
+                String[] unmark = str.split("unmark ", 2);
+                if (unmark.length < 2 || unmark[1].isEmpty()) {
+                    throw new InvalidTaskNumberException();
+                }
+                int index = Integer.parseInt(unmark[1]) - 1;
+                commands.add(new MarkNotDoneCommand(CommandType.UNMARK, index));
+                return commands;
+            } catch (NumberFormatException e) {
+                System.out.println("The number you keyed in was not an integer! Try again.");
+            }
+        case "todo":
+            try {
+                String[] description = str.split("todo", 2);
+                if (description.length < 2 || description[1].trim().isEmpty()) {
+                    throw new NoDescriptionException();
+                }
+                commands.add(new AddToDoCommand(CommandType.TODO, description[1].trim()));
+                return commands;
+            } catch (NoDescriptionException e) {
+                commands.add(new UnknownCommand(CommandType.UNKNOWN));
+                return commands;
+            }
+        case "t":
+            // same as to do, just with a different keyword from reading from save file
+            try {
+                String[] description = str.split("T \\| ", 2);
+                if (description.length < 2 || description[1].trim().isEmpty()) {
+                    throw new NoDescriptionException();
+                }
+                String status = description[1].substring(0, 3);
+                String[] statusAndDescription = description[1].split("]", 2);
+                boolean isDone = status.equals("[X]");
+                commands.add(new AddToDoCommand(CommandType.TODO, statusAndDescription[1].trim()));
+                if (isDone) {
+                    commands.add(new MarkCommand(CommandType.MARK, Prophet.getStorageSize()));
+                }
+                return commands;
+            } catch (NoDescriptionException e) {
+                commands.add(new UnknownCommand(CommandType.UNKNOWN));
+                return commands;
+            }
+        case "deadline":
+            try {
+                String[] description = str.split("deadline ", 2);
+                if (description.length < 2 || description[1].trim().isEmpty() || description[1].trim().startsWith("/by")) {
+                    throw new NoDescriptionException();
+                }
+                String[] remainingParts = description[1].split("/by",2);
+                if (remainingParts.length < 2 || remainingParts[1].trim().isEmpty()) {
+                    throw new NoDescriptionException();
+                }
+                commands.add(new AddDeadlineCommand(
+                        CommandType.DEADLINE, remainingParts[0].trim(), remainingParts[1].trim()));
+                return commands;
+            } catch (NoDescriptionException e) {
+                commands.add(new UnknownCommand(CommandType.UNKNOWN));
+                return commands;
+            }
+        case "d":
+            try {
+                String[] description = str.split("D \\| ", 2);
+                if (description.length < 2 || description[1].trim().isEmpty() || description[1].trim().startsWith("by:")) {
+                    throw new NoDescriptionException();
+                }
+                String status = description[1].substring(0, 3);
+                String[] statusAndDescription = description[1].split("]", 2);
+                boolean isDone = status.equals("[X]");
+                String[] remainingParts = statusAndDescription[1].split("by: ",2);
+                if (remainingParts.length < 2 || remainingParts[1].trim().isEmpty()) {
+                    throw new NoDescriptionException();
+                }
+                commands.add(new AddDeadlineCommand(
+                        CommandType.DEADLINE, remainingParts[0].trim(), remainingParts[1].trim()));
+                if (isDone) {
+                    commands.add(new MarkCommand(CommandType.MARK, Prophet.getStorageSize()));
+                }
+                return commands;
+            } catch (NoDescriptionException e) {
+                commands.add(new UnknownCommand(CommandType.UNKNOWN));
+                return commands;
+            }
+        case "event":
+            try {
+                String[] description = str.split("event ", 2);
+                if (description.length < 2 || description[1].trim().isEmpty() || description[1].trim().startsWith("/from")) {
+                    throw new NoDescriptionException();
+                }
+                String[] remainingParts = description[1].split("/from ",2);
+                if (remainingParts.length < 2 || remainingParts[1].trim().isEmpty()) {
+                    throw new NoDescriptionException();
+                }
+                String[] timeline = remainingParts[1].split("/to ",2);
+                if (timeline.length < 2 || timeline[1].trim().isEmpty()) {
+                    throw new NoDescriptionException();
+                }
+                commands.add(new AddEventCommand(
+                        CommandType.EVENT, remainingParts[0].trim(), timeline[0].trim(), timeline[1].trim()));
+                return commands;
+            } catch (NoDescriptionException e) {
+                commands.add(new UnknownCommand(CommandType.UNKNOWN));
+                return commands;
+            }
+        case "e":
+            try {
+                String[] description = str.split("E \\| ", 2);
+                if (description.length < 2 || description[1].trim().isEmpty() || description[1].trim().startsWith("/from")) {
+                    throw new NoDescriptionException();
+                }
+                String status = description[1].substring(0, 3);
+                System.out.println("event status: " + status);
+                String[] statusAndDescription = description[1].split("]", 2);
+                boolean isDone = status.equals("[X]");
+                System.out.println("isDone: " + isDone);
+                String[] remainingParts = statusAndDescription[1].split("from: ",2);
+                if (remainingParts.length < 2 || remainingParts[1].trim().isEmpty()) {
+                    throw new NoDescriptionException();
+                }
+                String[] timeline = remainingParts[1].trim().split("to: ",2);
+                if (timeline.length < 2 || timeline[1].trim().isEmpty()) {
+                    throw new NoDescriptionException();
+                }
+                commands.add(new AddEventCommand(
+                        CommandType.EVENT, remainingParts[0].trim(), timeline[0].trim(), timeline[1].trim()));
+                if (isDone) {
+                    commands.add(new MarkCommand(CommandType.MARK, Prophet.getStorageSize()));
+                }
+                return commands;
+            } catch (NoDescriptionException e) {
+                commands.add(new UnknownCommand(CommandType.UNKNOWN));
+                return commands;
+            }
+        case "delete":
+            try {
+                String[] delete = str.split("delete ", 2);
+                if (delete.length < 2 || delete[1].isEmpty()) {
+                    throw new InvalidTaskNumberException();
+                }
+                int index = Integer.parseInt(delete[1]) - 1;
+                commands.add(new DeleteTaskCommand(CommandType.DELETE, index));
+                return commands;
+            } catch (NumberFormatException e) {
+                System.out.println("The number you keyed in was not an integer! Try again.");
+            }
+        default:
+            commands.add(new UnknownCommand(CommandType.UNKNOWN));
+            return commands;
+        }
+    }
+}

@@ -1,10 +1,10 @@
-public class Deadline extends Task {
-    protected static final String type = "[D]";
+public class DeadlineTask extends Task {
+    protected static final String type = "D | ";
     protected String by;
 
-    public Deadline(String description, String by) {
+    public DeadlineTask(String description, String by) {
         super(description);
-        this.by = "(by:" + by + ")";
+        this.by = "by: " + by;
     }
 
     /**
@@ -13,7 +13,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getStatusIcon() {
-        return Deadline.type + super.getStatusIcon();
+        return DeadlineTask.type + super.getStatusIcon();
     }
 
     /**
@@ -22,6 +22,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return this.getStatusIcon() + super.getTaskDescription() + this.by + "\n";
+        return this.getStatusIcon() + super.getTaskDescription() + " " + this.by + "\n";
     }
 }

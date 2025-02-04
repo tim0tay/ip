@@ -1,6 +1,6 @@
-public class ToDo extends Task {
-    protected static final String type = "[T]";
-    public ToDo(String description) {
+public class ToDoTask extends Task {
+    protected static final String type = "T | ";
+    public ToDoTask(String description) {
         super(description);
     }
 
@@ -10,7 +10,7 @@ public class ToDo extends Task {
      */
     @Override
     public String getStatusIcon() {
-        return ToDo.type + super.getStatusIcon();
+        return ToDoTask.type + super.getStatusIcon();
     }
 
     /**
