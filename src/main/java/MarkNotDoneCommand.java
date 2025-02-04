@@ -2,7 +2,8 @@ public class MarkNotDoneCommand extends Command {
     /**
      * The MarkNotDoneCommand class represents the command to mark a task as not done.
      */
-    private static final String horizontalLine = "--------------------------------------------------------------------------------\n";
+    private static final String horizontalLine = "--------------------------------" +
+            "------------------------------------------------\n";
     private final int index;
 
     /**
@@ -17,11 +18,13 @@ public class MarkNotDoneCommand extends Command {
 
     /**
      * Marks a specific task as not done.
+     * Prints out the confirmation message or the error message.
+     * @param ui the user interface of the chatbot
      * @param storage the storage of tasks accumulated as the chatbot runs
      */
     @Override
-    public void execute(Storage storage) {
+    public void execute(Ui ui, Storage storage) {
         String marked = storage.markNotDone(index);
-        System.out.println(horizontalLine + marked + "\n" + horizontalLine);
+        ui.print(horizontalLine + marked + "\n" + horizontalLine);
     }
 }

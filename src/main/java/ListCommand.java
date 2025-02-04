@@ -13,12 +13,13 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Lists out all current tasks.
+     * Prints out all current tasks.
+     * @param ui the user interface of the chatbot
      * @param storage the storage of tasks
      */
     @Override
-    public void execute(Storage storage) {
+    public void execute(Ui ui, Storage storage) {
         String list = storage.enumerateList();
-        System.out.println(horizontalLine + list + "\n" + horizontalLine);
+        ui.print(horizontalLine + list + "\n" + horizontalLine);
     }
 }

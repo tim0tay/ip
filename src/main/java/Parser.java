@@ -14,7 +14,7 @@ public class Parser {
      * @param str the string representing the input
      * @return CommandType the type of command given in the input
      */
-    public static ArrayList<Command> parse(String str) throws InvalidTaskNumberException, NoDescriptionException {
+    public static ArrayList<Command> parse(Ui ui, String str) throws InvalidTaskNumberException, NoDescriptionException {
         // read first word of string
         // if first word is in commandtype, parse further for args
         String firstWord = str.split(" ", 2)[0].toLowerCase();
@@ -33,7 +33,7 @@ public class Parser {
                 commands.add(new MarkCommand(CommandType.MARK, index));
                 return commands;
             } catch (NumberFormatException e) {
-                System.out.println("The number you keyed in was not an integer! Try again.");
+                ui.print("The number you keyed in was not an integer! Try again.");
             }
         case "unmark":
             try {
@@ -45,7 +45,7 @@ public class Parser {
                 commands.add(new MarkNotDoneCommand(CommandType.UNMARK, index));
                 return commands;
             } catch (NumberFormatException e) {
-                System.out.println("The number you keyed in was not an integer! Try again.");
+                ui.print("The number you keyed in was not an integer! Try again.");
             }
         case "todo":
             try {
@@ -88,7 +88,6 @@ public class Parser {
                 if (remainingParts.length < 2 || remainingParts[1].trim().isEmpty()) {
                     throw new NoDescriptionException();
                 }
-                System.out.println("remainingParts[1]: " + remainingParts[1]);
                 LocalDate deadline = LocalDate.parse(remainingParts[1].trim());
                 commands.add(new AddDeadlineCommand(
                         CommandType.DEADLINE, remainingParts[0].trim(), deadline));
@@ -183,7 +182,7 @@ public class Parser {
                 commands.add(new DeleteTaskCommand(CommandType.DELETE, index));
                 return commands;
             } catch (NumberFormatException e) {
-                System.out.println("The number you keyed in was not an integer! Try again.");
+                ui.print("The number you keyed in was not an integer! Try again.");
             }
         default:
             commands.add(new UnknownCommand(CommandType.UNKNOWN));

@@ -25,12 +25,14 @@ public class AddEventCommand extends Command {
 
     /**
      * Adds an event task to the list of tasks.
+     * Prints out the confirmation message or the error message.
+     * @param ui the user interface of the chatbot
      * @param storage the storage of tasks accumulated as the chatbot runs
      */
     @Override
-    public void execute(Storage storage) {
+    public void execute(Ui ui, Storage storage) {
         EventTask newTask = new EventTask(this.taskDescription, this.from, this.to);
         String added = storage.addToList(newTask);
-        System.out.println(horizontalLine + added + "\n" + horizontalLine);
+        ui.print(horizontalLine + added + "\n" + horizontalLine);
     }
 }

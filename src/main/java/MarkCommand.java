@@ -18,11 +18,12 @@ public class MarkCommand extends Command {
     /**
      * Marks a specific task as done.
      * Prints out the confirmation message or the error message.
+     * @param ui the user interface of the chatbot
      * @param storage the storage of tasks accumulated as the chatbot runs
      */
     @Override
-    public void execute(Storage storage) {
+    public void execute(Ui ui, Storage storage) {
         String marked = storage.markDone(index);
-        System.out.println(horizontalLine + marked + "\n" + horizontalLine);
+        ui.print(horizontalLine + marked + "\n" + horizontalLine);
     }
 }
