@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Parser {
@@ -85,10 +88,12 @@ public class Parser {
                 if (remainingParts.length < 2 || remainingParts[1].trim().isEmpty()) {
                     throw new NoDescriptionException();
                 }
+                System.out.println("remainingParts[1]: " + remainingParts[1]);
+                LocalDate deadline = LocalDate.parse(remainingParts[1].trim());
                 commands.add(new AddDeadlineCommand(
-                        CommandType.DEADLINE, remainingParts[0].trim(), remainingParts[1].trim()));
+                        CommandType.DEADLINE, remainingParts[0].trim(), deadline));
                 return commands;
-            } catch (NoDescriptionException e) {
+            } catch (NoDescriptionException | DateTimeParseException e) {
                 commands.add(new UnknownCommand(CommandType.UNKNOWN));
                 return commands;
             }
@@ -105,13 +110,14 @@ public class Parser {
                 if (remainingParts.length < 2 || remainingParts[1].trim().isEmpty()) {
                     throw new NoDescriptionException();
                 }
+                LocalDate deadline = LocalDate.parse(remainingParts[1].trim(), DateTimeFormatter.ofPattern("MMM dd yyyy"));
                 commands.add(new AddDeadlineCommand(
-                        CommandType.DEADLINE, remainingParts[0].trim(), remainingParts[1].trim()));
+                        CommandType.DEADLINE, remainingParts[0].trim(), deadline));
                 if (isDone) {
                     commands.add(new MarkCommand(CommandType.MARK, Prophet.getStorageSize()));
                 }
                 return commands;
-            } catch (NoDescriptionException e) {
+            } catch (NoDescriptionException | DateTimeParseException e) {
                 commands.add(new UnknownCommand(CommandType.UNKNOWN));
                 return commands;
             }
@@ -129,10 +135,12 @@ public class Parser {
                 if (timeline.length < 2 || timeline[1].trim().isEmpty()) {
                     throw new NoDescriptionException();
                 }
+                LocalDate from = LocalDate.parse(timeline[0].trim());
+                LocalDate to = LocalDate.parse(timeline[1].trim());
                 commands.add(new AddEventCommand(
-                        CommandType.EVENT, remainingParts[0].trim(), timeline[0].trim(), timeline[1].trim()));
+                        CommandType.EVENT, remainingParts[0].trim(), from, to));
                 return commands;
-            } catch (NoDescriptionException e) {
+            } catch (NoDescriptionException | DateTimeParseException e) {
                 commands.add(new UnknownCommand(CommandType.UNKNOWN));
                 return commands;
             }
@@ -143,10 +151,8 @@ public class Parser {
                     throw new NoDescriptionException();
                 }
                 String status = description[1].substring(0, 3);
-                System.out.println("event status: " + status);
                 String[] statusAndDescription = description[1].split("]", 2);
                 boolean isDone = status.equals("[X]");
-                System.out.println("isDone: " + isDone);
                 String[] remainingParts = statusAndDescription[1].split("from: ",2);
                 if (remainingParts.length < 2 || remainingParts[1].trim().isEmpty()) {
                     throw new NoDescriptionException();
@@ -155,13 +161,15 @@ public class Parser {
                 if (timeline.length < 2 || timeline[1].trim().isEmpty()) {
                     throw new NoDescriptionException();
                 }
+                LocalDate from = LocalDate.parse(timeline[0].trim(), DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                LocalDate to = LocalDate.parse(timeline[1].trim(), DateTimeFormatter.ofPattern("MMM dd yyyy"));
                 commands.add(new AddEventCommand(
-                        CommandType.EVENT, remainingParts[0].trim(), timeline[0].trim(), timeline[1].trim()));
+                        CommandType.EVENT, remainingParts[0].trim(), from, to));
                 if (isDone) {
                     commands.add(new MarkCommand(CommandType.MARK, Prophet.getStorageSize()));
                 }
                 return commands;
-            } catch (NoDescriptionException e) {
+            } catch (NoDescriptionException | DateTimeParseException e) {
                 commands.add(new UnknownCommand(CommandType.UNKNOWN));
                 return commands;
             }

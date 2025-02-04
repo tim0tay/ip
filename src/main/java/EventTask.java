@@ -1,12 +1,15 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class EventTask extends Task {
     protected static final String type = "E | ";
-    protected String from;
-    protected String to;
+    protected LocalDate from;
+    protected LocalDate to;
 
-    public EventTask(String description, String from, String to) {
+    public EventTask(String description, LocalDate from, LocalDate to) {
         super(description);
-        this.from = "from: " + from + " ";
-        this.to = "to: " + to;
+        this.from = from;
+        this.to = to;
     }
 
     /**
@@ -25,6 +28,7 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         return this.getStatusIcon() + super.getTaskDescription()
-                + " " + this.from + " " + this.to + "\n";
+                + " from: " + this.from.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                + " to: " + this.to.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + "\n";
     }
 }

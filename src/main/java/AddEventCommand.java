@@ -1,18 +1,22 @@
+import java.time.LocalDate;
+
 public class AddEventCommand extends Command {
     /**
      * The AddEventCommand class represents the command to add an event task.
      */
     private static final String horizontalLine = "--------------------------------------------------------------------------------\n";
     private final String taskDescription;
-    private final String from;
-    private final String to;
+    private final LocalDate from;
+    private final LocalDate to;
 
     /**
      * Initialises a newly created AddEventCommand object.
      * @param command the type of command
      * @param taskDescription the description of the task
+     * @param from the start date of the event
+     * @param to the end date of the event
      */
-    public AddEventCommand(CommandType command, String taskDescription, String from, String to) {
+    public AddEventCommand(CommandType command, String taskDescription, LocalDate from, LocalDate to) {
         super(command);
         this.taskDescription = taskDescription;
         this.from = from;

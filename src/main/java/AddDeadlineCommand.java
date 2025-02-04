@@ -1,10 +1,12 @@
+import java.time.LocalDate;
+
 public class AddDeadlineCommand extends Command {
     /**
      * The AddDeadlineCommand class represents the command to add a deadline task.
      */
     private static final String horizontalLine = "--------------------------------------------------------------------------------\n";
     private final String taskDescription;
-    private final String deadline;
+    private final LocalDate deadline;
 
     /**
      * Initialises a newly created AddDeadlineCommand object.
@@ -12,7 +14,7 @@ public class AddDeadlineCommand extends Command {
      * @param taskDescription the description of the task
      * @param deadline the deadline of the task
      */
-    public AddDeadlineCommand(CommandType command, String taskDescription, String deadline) {
+    public AddDeadlineCommand(CommandType command, String taskDescription, LocalDate deadline) {
         super(command);
         this.taskDescription = taskDescription;
         this.deadline = deadline;
