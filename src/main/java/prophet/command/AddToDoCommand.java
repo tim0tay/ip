@@ -1,37 +1,35 @@
-import java.time.LocalDate;
+package prophet.command;
 
-public class AddEventCommand extends Command {
+import prophet.storage.Storage;
+import prophet.task.ToDoTask;
+import prophet.ui.Ui;
+
+public class AddToDoCommand extends Command {
     /**
-     * The AddEventCommand class represents the command to add an event task.
+     * The AddToDoCommand class represents the command to add a to-do task.
      */
     private static final String horizontalLine = "--------------------------------------------------------------------------------\n";
     private final String taskDescription;
-    private final LocalDate from;
-    private final LocalDate to;
 
     /**
-     * Initialises a newly created AddEventCommand object.
+     * Initialises a newly created AddToDoCommand object.
      * @param command the type of command
      * @param taskDescription the description of the task
-     * @param from the start date of the event
-     * @param to the end date of the event
      */
-    public AddEventCommand(CommandType command, String taskDescription, LocalDate from, LocalDate to) {
+    public AddToDoCommand(CommandType command, String taskDescription) {
         super(command);
         this.taskDescription = taskDescription;
-        this.from = from;
-        this.to = to;
     }
 
     /**
-     * Adds an event task to the list of tasks.
+     * Adds a to-do task to the list of tasks.
      * Prints out the confirmation message or the error message.
      * @param ui the user interface of the chatbot
      * @param storage the storage of tasks accumulated as the chatbot runs
      */
     @Override
     public void execute(Ui ui, Storage storage) {
-        EventTask newTask = new EventTask(this.taskDescription, this.from, this.to);
+        ToDoTask newTask = new ToDoTask(this.taskDescription);
         String added = storage.addToList(newTask);
         ui.print(horizontalLine + added + "\n" + horizontalLine);
     }

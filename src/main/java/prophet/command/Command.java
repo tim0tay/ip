@@ -1,3 +1,10 @@
+package prophet.command;
+
+import prophet.exception.InvalidTaskNumberException;
+import prophet.exception.NoDescriptionException;
+import prophet.storage.Storage;
+import prophet.ui.Ui;
+
 public abstract class Command {
     /**
      * The Command class represents commands that can be run by the chatbot.

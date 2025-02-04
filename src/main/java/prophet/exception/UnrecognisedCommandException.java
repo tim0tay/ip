@@ -1,3 +1,5 @@
+package prophet.exception;
+
 public class UnrecognisedCommandException extends ProphetException {
     protected String message;
 

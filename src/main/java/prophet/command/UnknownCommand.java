@@ -1,3 +1,8 @@
+package prophet.command;
+
+import prophet.storage.Storage;
+import prophet.ui.Ui;
+
 public class UnknownCommand extends Command {
     /**
      * The UnknownCommand class represents the command to handle unknown commands from the chatbot.

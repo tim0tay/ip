@@ -1,4 +1,7 @@
-import java.io.File;
+package prophet.storage;
+
+import prophet.task.Task;
+import prophet.todolist.TodoList;
 
 public class Storage {
     /**
