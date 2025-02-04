@@ -1,3 +1,5 @@
+package prophet.task;
+
 public class ToDoTask extends Task {
     protected static final String type = "T | ";
     public ToDoTask(String description) {

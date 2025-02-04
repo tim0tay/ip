@@ -1,3 +1,5 @@
+package prophet.ui;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -33,14 +35,6 @@ public class Ui {
      */
     public static void bye() {
         System.out.println(horizontalLine + "Bye! Hope to see you again!\n" + horizontalLine);
-    }
-
-    /**
-     * Returns true if there is another line in the input to the ui.
-     * @return true if and only if there is another line in the input
-     */
-    public boolean hasNextLine() {
-        return scanner.hasNextLine();
     }
 
     /**

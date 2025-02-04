@@ -1,3 +1,9 @@
+package prophet.command;
+
+import prophet.task.DeadlineTask;
+import prophet.storage.Storage;
+import prophet.ui.Ui;
+
 import java.time.LocalDate;
 
 public class AddDeadlineCommand extends Command {

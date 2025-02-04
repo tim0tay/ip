@@ -1,3 +1,5 @@
+package prophet.exception;
+
 public class NoDescriptionException extends ProphetException {
     protected String message;
 

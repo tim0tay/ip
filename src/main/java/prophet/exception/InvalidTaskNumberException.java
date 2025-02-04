@@ -1,8 +1,10 @@
-public class ProphetException extends Exception {
+package prophet.exception;
+
+public class InvalidTaskNumberException extends ProphetException {
     protected String message;
 
-    public ProphetException() {
-        this.message = "Oops! Hit a wall somewhere...\n";
+    public InvalidTaskNumberException() {
+        this.message = "Whoops! Invalid number. Please key in a valid integer\n";
     }
 
     /**

@@ -1,3 +1,11 @@
+package prophet.parser;
+
+import prophet.Prophet;
+import prophet.command.*;
+import prophet.exception.InvalidTaskNumberException;
+import prophet.exception.NoDescriptionException;
+import prophet.ui.Ui;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;

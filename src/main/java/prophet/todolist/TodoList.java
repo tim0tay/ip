@@ -1,3 +1,7 @@
+package prophet.todolist;
+
+import prophet.task.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 public class TodoList {

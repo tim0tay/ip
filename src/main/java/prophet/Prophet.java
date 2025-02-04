@@ -1,3 +1,12 @@
+package prophet;
+
+import prophet.command.Command;
+import prophet.exception.ProphetException;
+import prophet.parser.Parser;
+import prophet.storage.Save;
+import prophet.storage.Storage;
+import prophet.ui.Ui;
+
 import java.util.ArrayList;
 public class Prophet {
     /**
