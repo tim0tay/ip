@@ -1,7 +1,16 @@
 package prophet.task;
 
 public class ToDoTask extends Task {
+    /**
+     * The ToDoTask class represents a task that needs to be done.
+     */
+
     protected static final String type = "T | ";
+
+    /**
+     * Initialises a newly created ToDoTask object with a description.
+     * @param description the description of the task
+     */
     public ToDoTask(String description) {
         super(description);
     }
@@ -16,8 +25,8 @@ public class ToDoTask extends Task {
     }
 
     /**
-     * Returns a string representation of the todo.
-     * @return the string that represents the todo description
+     * Returns a string representation of the to do.
+     * @return the string that represents the to do description
      */
     @Override
     public String toString() {

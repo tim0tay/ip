@@ -21,6 +21,7 @@ public class Save {
 
     /**
      * Saves the tasks to a file.
+     * @param ui the user interface of the chatbot
      * @param storage the storage of tasks accumulated as the chatbot runs
      */
     public static void save(Ui ui, Storage storage) {
@@ -43,6 +44,8 @@ public class Save {
 
     /**
      * Loads the tasks from a file into the storage of tasks.
+     * @param ui the user interface of the chatbot
+     * @param storage the storage of tasks accumulated as the chatbot runs
      */
     public static void load(Ui ui, Storage storage) {
         try {
