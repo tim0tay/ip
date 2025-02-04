@@ -4,7 +4,8 @@ public class UnknownCommand extends Command {
      */
     private static final String horizontalLine = "--------------------------------------------------------------------------------\n";
     private static final String message = "Part of your description is missing. Usage is as such: \n" +
-            "todo description \nOR \ndeadline description /by when \nOR \nevent description /from when /to when\n";
+            "todo description \nOR \ndeadline description /by when (format: YYYY-MM-DD) " +
+            "\nOR \nevent description /from when (format: YYYY-MM-DD) /to when (format: YYYY-MM-DD)\n";
 
     /**
      * Initialises a newly created UnknownCommand object.

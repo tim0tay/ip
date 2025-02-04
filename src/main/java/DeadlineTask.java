@@ -1,10 +1,13 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class DeadlineTask extends Task {
     protected static final String type = "D | ";
-    protected String by;
+    protected LocalDate deadline;
 
-    public DeadlineTask(String description, String by) {
+    public DeadlineTask(String description, LocalDate deadline) {
         super(description);
-        this.by = "by: " + by;
+        this.deadline = deadline;
     }
 
     /**
@@ -22,6 +25,7 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String toString() {
-        return this.getStatusIcon() + super.getTaskDescription() + " " + this.by + "\n";
+        return this.getStatusIcon() + super.getTaskDescription() + " by: "
+                + this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + "\n";
     }
 }
