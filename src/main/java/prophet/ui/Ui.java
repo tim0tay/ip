@@ -6,8 +6,8 @@ public class Ui {
     /**
      * The Ui class represents the user interface of the chatbot.
      */
-    private static final String horizontalLine = "----------------------------------------" +
-            "----------------------------------------\n";
+    private static final String HORIZONTAL_LINE = "----------------------------------------"
+            + "----------------------------------------\n";
     private final Scanner scanner;
 
     /**
@@ -20,8 +20,8 @@ public class Ui {
     /**
      * Prints the welcome message of the chatbot.
      */
-    public static void greet() {
-        System.out.println(horizontalLine
+    public static void greetHello() {
+        System.out.println(HORIZONTAL_LINE
                 + "Hi! Welcome to the Daily Prophet! You can call me Prophet for short.\n"
                 + "For now, I can keep track of your tasks."
                 + "I can do the following: \n"
@@ -30,14 +30,14 @@ public class Ui {
                 + "3. List out your tasks (keyword is list)\n"
                 + "4. Delete tasks (keyword is delete)\n"
                 + "What would you like to do?\n"
-                + horizontalLine);
+                + HORIZONTAL_LINE);
     }
 
     /**
      * Prints the farewell message of the chatbot.
      */
-    public static void bye() {
-        System.out.println(horizontalLine + "Bye! Hope to see you again!\n" + horizontalLine);
+    public static void greetGoodbye() {
+        System.out.println(HORIZONTAL_LINE + "Bye! Hope to see you again!\n" + HORIZONTAL_LINE);
     }
 
     /**

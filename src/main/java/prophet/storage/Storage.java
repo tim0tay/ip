@@ -37,9 +37,9 @@ public class Storage {
      * @param taskNumber the task number to be marked as done
      * @return the message that the task has been marked as done or the error message
      */
-    public String markDone(int taskNumber) {
+    public String setDone(int taskNumber) {
         try {
-            return tasks.markDone(taskNumber);
+            return tasks.setDone(taskNumber);
         } catch (IndexOutOfBoundsException e) {
             return e.getMessage();
         }
@@ -50,9 +50,9 @@ public class Storage {
      * @param taskNumber the task number to be marked as not done
      * @return the message that the task has been marked as not done or the error message
      */
-    public String markNotDone(int taskNumber) {
+    public String setNotDone(int taskNumber) {
         try {
-            return tasks.markNotDone(taskNumber);
+            return tasks.setNotDone(taskNumber);
         } catch (IndexOutOfBoundsException e) {
             return e.getMessage();
         }

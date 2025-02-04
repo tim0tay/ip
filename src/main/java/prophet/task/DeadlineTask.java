@@ -8,7 +8,7 @@ public class DeadlineTask extends Task {
      * The DeadlineTask class represents a task with a deadline.
      */
 
-    protected static final String type = "D | ";
+    protected static final String TYPE = "D | ";
     protected LocalDate deadline;
 
     /**
@@ -27,7 +27,7 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String getStatusIcon() {
-        return DeadlineTask.type + super.getStatusIcon();
+        return DeadlineTask.TYPE + super.getStatusIcon();
     }
 
     /**

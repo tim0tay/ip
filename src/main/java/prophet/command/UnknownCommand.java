@@ -7,9 +7,9 @@ public class UnknownCommand extends Command {
     /**
      * The UnknownCommand class represents the command to handle unknown commands from the chatbot.
      */
-    private static final String horizontalLine = "---------------------------------------" +
-            "-----------------------------------------\n";
-    private static final String message = "Part of your description is missing. Usage is as such: \n" +
+    private static final String HORIZONTAL_LINE = "---------------------------------------"
+            + "-----------------------------------------\n";
+    private static final String MESSAGE = "Part of your description is missing. Usage is as such: \n" +
             "todo description \nOR \ndeadline description /by when (format: YYYY-MM-DD) " +
             "\nOR \nevent description /from when (format: YYYY-MM-DD) /to when (format: YYYY-MM-DD)\n";
 
@@ -29,6 +29,6 @@ public class UnknownCommand extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage) {
-        ui.print(horizontalLine + UnknownCommand.message + "\n" + horizontalLine);
+        ui.print(HORIZONTAL_LINE + UnknownCommand.MESSAGE + "\n" + HORIZONTAL_LINE);
     }
 }

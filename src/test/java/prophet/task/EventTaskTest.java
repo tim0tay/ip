@@ -20,7 +20,7 @@ public class EventTaskTest {
         // Test case where the event task is from 2021-09-01 to 2021-09-02
         EventTask eventTask = new EventTask(
                 "CS2103T Lecture", LocalDate.parse("2021-09-01"), LocalDate.parse("2021-09-02"));
-        eventTask.markDone();
+        eventTask.setDone();
         assertEquals("E | [X] ", eventTask.getStatusIcon());
     }
 

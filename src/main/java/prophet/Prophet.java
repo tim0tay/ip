@@ -13,8 +13,6 @@ public class Prophet {
      * The Prophet class is the main class that runs the chatbot.
      */
 
-    private static final String horizontalLine = "-----------------------------------" +
-            "---------------------------------------------\n";
     private static Storage storage;
 
     /**
@@ -29,7 +27,7 @@ public class Prophet {
         Prophet.storage = new Storage();
         Ui ui = new Ui();
         Save.load(ui, Prophet.storage);
-        Ui.greet();
+        Ui.greetHello();
         String str = ui.run();
         while (!str.equalsIgnoreCase("bye")) {
             try {
@@ -44,7 +42,7 @@ public class Prophet {
                 str = ui.run();
             }
         }
-        Ui.bye();
+        Ui.greetGoodbye();
         Save.save(ui, Prophet.storage);
     }
 }

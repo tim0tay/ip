@@ -15,8 +15,6 @@ public class Parser {
     /**
      * The Parser class takes in user input and interprets it to perform the necessary actions.
      */
-    private static final String horizontalLine = "----------------------------------" +
-            "----------------------------------------------\n";
 
     /**
      * Interprets command-line inputs and returns the command type according to keywords.
@@ -24,7 +22,8 @@ public class Parser {
      * @param str the string representing the input
      * @return CommandType the type of command given in the input
      */
-    public static ArrayList<Command> parse(Ui ui, String str) throws InvalidTaskNumberException, NoDescriptionException {
+    public static ArrayList<Command> parse(Ui ui, String str)
+            throws InvalidTaskNumberException, NoDescriptionException {
         // read first word of string
         // if first word is in commandtype, parse further for args
         String firstWord = str.split(" ", 2)[0].toLowerCase();
@@ -96,7 +95,8 @@ public class Parser {
             // add a deadline task
             try {
                 String[] description = str.split("deadline ", 2);
-                if (description.length < 2 || description[1].trim().isEmpty() || description[1].trim().startsWith("/by")) {
+                if (description.length < 2 || description[1].trim().isEmpty()
+                        || description[1].trim().startsWith("/by")) {
                     throw new NoDescriptionException();
                 }
                 String[] remainingParts = description[1].split("/by",2);
@@ -115,7 +115,8 @@ public class Parser {
             // same as deadline, just with a different keyword from reading from save file
             try {
                 String[] description = str.split("D \\| ", 2);
-                if (description.length < 2 || description[1].trim().isEmpty() || description[1].trim().startsWith("by:")) {
+                if (description.length < 2 || description[1].trim().isEmpty()
+                        || description[1].trim().startsWith("by:")) {
                     throw new NoDescriptionException();
                 }
                 String status = description[1].substring(0, 3);
@@ -125,7 +126,8 @@ public class Parser {
                 if (remainingParts.length < 2 || remainingParts[1].trim().isEmpty()) {
                     throw new NoDescriptionException();
                 }
-                LocalDate deadline = LocalDate.parse(remainingParts[1].trim(), DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                LocalDate deadline = LocalDate.parse(
+                        remainingParts[1].trim(), DateTimeFormatter.ofPattern("MMM dd yyyy"));
                 commands.add(new AddDeadlineCommand(
                         CommandType.DEADLINE, remainingParts[0].trim(), deadline));
                 if (isDone) {
@@ -140,7 +142,8 @@ public class Parser {
             // add an event task
             try {
                 String[] description = str.split("event ", 2);
-                if (description.length < 2 || description[1].trim().isEmpty() || description[1].trim().startsWith("/from")) {
+                if (description.length < 2 || description[1].trim().isEmpty()
+                        || description[1].trim().startsWith("/from")) {
                     throw new NoDescriptionException();
                 }
                 String[] remainingParts = description[1].split("/from ",2);
@@ -164,7 +167,8 @@ public class Parser {
             // same as event, just with a different keyword from reading from save file
             try {
                 String[] description = str.split("E \\| ", 2);
-                if (description.length < 2 || description[1].trim().isEmpty() || description[1].trim().startsWith("/from")) {
+                if (description.length < 2 || description[1].trim().isEmpty()
+                        || description[1].trim().startsWith("/from")) {
                     throw new NoDescriptionException();
                 }
                 String status = description[1].substring(0, 3);

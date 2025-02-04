@@ -8,7 +8,8 @@ public class AddToDoCommand extends Command {
     /**
      * The AddToDoCommand class represents the command to add a to-do task.
      */
-    private static final String horizontalLine = "--------------------------------------------------------------------------------\n";
+    private static final String HORIZONTAL_LINE = "-------------------------------------"
+            + "-------------------------------------------\n";
     private final String taskDescription;
 
     /**
@@ -31,6 +32,6 @@ public class AddToDoCommand extends Command {
     public void execute(Ui ui, Storage storage) {
         ToDoTask newTask = new ToDoTask(this.taskDescription);
         String added = storage.addToList(newTask);
-        ui.print(horizontalLine + added + "\n" + horizontalLine);
+        ui.print(HORIZONTAL_LINE + added + "\n" + HORIZONTAL_LINE);
     }
 }

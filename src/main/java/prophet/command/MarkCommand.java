@@ -7,7 +7,8 @@ public class MarkCommand extends Command {
     /**
      *  The MarkCommand class represents the command to mark a task as done.
      */
-    private static final String horizontalLine = "--------------------------------------------------------------------------------\n";
+    private static final String HORIZONTAL_LINE = "------------------------------"
+            + "--------------------------------------------------\n";
     private final int index;
 
     /**
@@ -28,7 +29,7 @@ public class MarkCommand extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage) {
-        String marked = storage.markDone(index);
-        ui.print(horizontalLine + marked + "\n" + horizontalLine);
+        String marked = storage.setDone(index);
+        ui.print(HORIZONTAL_LINE + marked + "\n" + HORIZONTAL_LINE);
     }
 }
