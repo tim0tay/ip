@@ -5,7 +5,7 @@ public class ToDoTask extends Task {
      * The ToDoTask class represents a task that needs to be done.
      */
 
-    protected static final String type = "T | ";
+    protected static final String TYPE = "T | ";
 
     /**
      * Initialises a newly created ToDoTask object with a description.
@@ -21,7 +21,7 @@ public class ToDoTask extends Task {
      */
     @Override
     public String getStatusIcon() {
-        return ToDoTask.type + super.getStatusIcon();
+        return ToDoTask.TYPE + super.getStatusIcon();
     }
 
     /**

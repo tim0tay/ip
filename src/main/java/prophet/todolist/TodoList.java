@@ -66,9 +66,9 @@ public class TodoList {
      * @throws IndexOutOfBoundsException if the task number is invalid
      * @return the string that confirms successful marking of the task
      */
-    public String markDone(int taskNumber) throws IndexOutOfBoundsException {
+    public String setDone(int taskNumber) throws IndexOutOfBoundsException {
         try {
-            this.list.get(taskNumber).markDone();
+            this.list.get(taskNumber).setDone();
             StringBuilder result = new StringBuilder("Done! Good job.\n");
             result.append(this.list.get(taskNumber).getStatusIcon())
                     .append(this.list.get(taskNumber).getTaskDescription()).append("\n");
@@ -84,9 +84,9 @@ public class TodoList {
      * @throws IndexOutOfBoundsException if the task number is invalid
      * @return the string that confirms successful marking of the task
      */
-    public String markNotDone(int taskNumber) throws IndexOutOfBoundsException {
+    public String setNotDone(int taskNumber) throws IndexOutOfBoundsException {
         try {
-            this.list.get(taskNumber).markNotDone();
+            this.list.get(taskNumber).setNotDone();
             StringBuilder result = new StringBuilder("Marked not done! Jiayous...\n");
             result.append(this.list.get(taskNumber).getStatusIcon())
                     .append(this.list.get(taskNumber).getTaskDescription()).append("\n");

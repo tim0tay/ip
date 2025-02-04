@@ -8,7 +8,7 @@ public class EventTask extends Task {
      * The EventTask class represents a task that spans a period of time.
      */
 
-    protected static final String type = "E | ";
+    protected static final String TYPE = "E | ";
     protected LocalDate from;
     protected LocalDate to;
 
@@ -30,7 +30,7 @@ public class EventTask extends Task {
      */
     @Override
     public String getStatusIcon() {
-        return EventTask.type + super.getStatusIcon();
+        return EventTask.TYPE + super.getStatusIcon();
     }
 
     /**

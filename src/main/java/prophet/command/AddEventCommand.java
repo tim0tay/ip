@@ -10,8 +10,8 @@ public class AddEventCommand extends Command {
     /**
      * The AddEventCommand class represents the command to add an event task.
      */
-    private static final String horizontalLine = "----------------------------------" +
-            "----------------------------------------------\n";
+    private static final String HORIZONTAL_LINE = "----------------------------------"
+            + "----------------------------------------------\n";
     private final String taskDescription;
     private final LocalDate from;
     private final LocalDate to;
@@ -40,6 +40,6 @@ public class AddEventCommand extends Command {
     public void execute(Ui ui, Storage storage) {
         EventTask newTask = new EventTask(this.taskDescription, this.from, this.to);
         String added = storage.addToList(newTask);
-        ui.print(horizontalLine + added + "\n" + horizontalLine);
+        ui.print(HORIZONTAL_LINE + added + "\n" + HORIZONTAL_LINE);
     }
 }

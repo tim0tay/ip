@@ -7,7 +7,8 @@ public class ListCommand extends Command {
     /**
      * The ListCommand class represents a command to list all tasks in the chatbot.
      */
-    private static final String horizontalLine = "--------------------------------------------------------------------------------\n";
+    private static final String HORIZONTAL_LINE = "--------------------------------------------"
+            + "------------------------------------\n";
 
     /**
      * Initialises a newly created ListCommand object.
@@ -25,6 +26,6 @@ public class ListCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage) {
         String list = storage.enumerateList();
-        ui.print(horizontalLine + list + "\n" + horizontalLine);
+        ui.print(HORIZONTAL_LINE + list + "\n" + HORIZONTAL_LINE);
     }
 }

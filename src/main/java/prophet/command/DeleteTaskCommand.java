@@ -8,8 +8,8 @@ public class DeleteTaskCommand extends Command {
     /**
      * The DeleteTaskCommand class represents the command to delete a task from the chatbot.
      */
-    private static final String horizontalLine = "------------------------------------" +
-            "--------------------------------------------\n";
+    private static final String HORIZONTAL_LINE = "------------------------------------"
+            + "--------------------------------------------\n";
     private final int index;
 
     /**
@@ -31,6 +31,6 @@ public class DeleteTaskCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage) throws InvalidTaskNumberException {
         String deleted = storage.deleteTask(this.index);
-        ui.print(horizontalLine + deleted + "\n" + horizontalLine);
+        ui.print(HORIZONTAL_LINE + deleted + "\n" + HORIZONTAL_LINE);
     }
 }

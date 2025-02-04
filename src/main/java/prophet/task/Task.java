@@ -36,14 +36,14 @@ public class Task {
     /**
      * Toggles the task's status to done.
      */
-    public void markDone() {
+    public void setDone() {
         this.isDone = true;
     }
 
     /**
      * Toggles the task's status to not done.
      */
-    public void markNotDone() {
+    public void setNotDone() {
         this.isDone = false;
     }
 

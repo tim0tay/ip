@@ -7,8 +7,8 @@ public class MarkNotDoneCommand extends Command {
     /**
      * The MarkNotDoneCommand class represents the command to mark a task as not done.
      */
-    private static final String horizontalLine = "--------------------------------" +
-            "------------------------------------------------\n";
+    private static final String HORIZONTAL_LINE = "--------------------------------"
+            + "------------------------------------------------\n";
     private final int index;
 
     /**
@@ -29,7 +29,7 @@ public class MarkNotDoneCommand extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage) {
-        String marked = storage.markNotDone(index);
-        ui.print(horizontalLine + marked + "\n" + horizontalLine);
+        String marked = storage.setNotDone(index);
+        ui.print(HORIZONTAL_LINE + marked + "\n" + HORIZONTAL_LINE);
     }
 }
