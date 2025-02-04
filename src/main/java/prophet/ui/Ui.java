@@ -8,10 +8,7 @@ public class Ui {
      */
     private static final String horizontalLine = "----------------------------------------" +
             "----------------------------------------\n";
-    private static final String message = "Part of your description is missing. Usage is as such: \n" +
-            "todo description \nOR \ndeadline description /by when (format: YYYY-MM-DD) " +
-            "\nOR \nevent description /from when (format: YYYY-MM-DD) /to when (format: YYYY-MM-DD)\n";
-    private Scanner scanner;
+    private final Scanner scanner;
 
     /**
      * Initialises a newly created Ui object.
@@ -26,7 +23,13 @@ public class Ui {
     public static void greet() {
         System.out.println(horizontalLine
                 + "Hi! Welcome to the Daily Prophet! You can call me Prophet for short.\n"
-                + "For now, I can keep track of your tasks. What would you like to remember?\n"
+                + "For now, I can keep track of your tasks."
+                + "I can do the following: \n"
+                + "1. Add tasks (keywords are todo, deadline or event)\n"
+                + "2. Mark tasks done or not done (keywords are mark or unmark)\n"
+                + "3. List out your tasks (keyword is list)\n"
+                + "4. Delete tasks (keyword is delete)\n"
+                + "What would you like to do?\n"
                 + horizontalLine);
     }
 

@@ -18,6 +18,7 @@ public class Storage {
 
     /**
      * Enumerates the list of tasks.
+     * @return the enumerated list of tasks
      */
     public String enumerateList() {
         return tasks.enumerateList();
@@ -25,6 +26,7 @@ public class Storage {
 
     /**
      * Enumerates the list of tasks for saving purposes.
+     * @return the enumerated list of tasks for saving purposes
      */
     public String enumerateSaveList() {
         return tasks.enumerateSaveList();
@@ -33,6 +35,7 @@ public class Storage {
     /**
      * Marks a task as done.
      * @param taskNumber the task number to be marked as done
+     * @return the message that the task has been marked as done or the error message
      */
     public String markDone(int taskNumber) {
         try {
@@ -45,6 +48,7 @@ public class Storage {
     /**
      * Marks a task as not done.
      * @param taskNumber the task number to be marked as not done
+     * @return the message that the task has been marked as not done or the error message
      */
     public String markNotDone(int taskNumber) {
         try {
@@ -57,6 +61,7 @@ public class Storage {
     /**
      * Adds a to-do task to the list of tasks.
      * @param task the description of the task
+     * @return the message that the task has been added to the list
      */
     public String addToList(Task task) {
         return tasks.addToList(task);
@@ -65,6 +70,7 @@ public class Storage {
     /**
      * Deletes a task from the list of tasks.
      * @param taskNumber the task number to be deleted
+     * @return the message that the task has been deleted or the error message
      */
     public String deleteTask(int taskNumber) {
         try {

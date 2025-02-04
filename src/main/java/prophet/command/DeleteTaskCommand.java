@@ -8,7 +8,8 @@ public class DeleteTaskCommand extends Command {
     /**
      * The DeleteTaskCommand class represents the command to delete a task from the chatbot.
      */
-    private static final String horizontalLine = "--------------------------------------------------------------------------------\n";
+    private static final String horizontalLine = "------------------------------------" +
+            "--------------------------------------------\n";
     private final int index;
 
     /**

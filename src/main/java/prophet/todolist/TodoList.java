@@ -5,8 +5,15 @@ import prophet.task.Task;
 import java.util.ArrayList;
 import java.util.List;
 public class TodoList {
+    /**
+     * The TodoList class represents a list of tasks that the user has to do.
+     */
+
     private final List<Task> list;
 
+    /**
+     * Initialises a newly created TodoList object with an empty list.
+     */
     public TodoList() {
         this.list = new ArrayList<>();
     }

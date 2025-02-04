@@ -1,9 +1,17 @@
 package prophet.task;
 
 public class Task {
+    /**
+     * The Task class represents a task with a description and a status.
+     */
+
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Initialises a newly created Task object with a description and a status.
+     * @param description the description of the task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -16,6 +24,7 @@ public class Task {
     public String getStatusIcon() {
         return this.isDone ? "[X] " : "[ ] ";
     }
+
     /**
      * Returns a string of the task's description.
      * @return the string that represents the task description

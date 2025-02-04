@@ -4,10 +4,20 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class EventTask extends Task {
+    /**
+     * The EventTask class represents a task that spans a period of time.
+     */
+
     protected static final String type = "E | ";
     protected LocalDate from;
     protected LocalDate to;
 
+    /**
+     * Initialises a newly created EventTask object with a description and a time period.
+     * @param description the description of the task
+     * @param from the start of the time period
+     * @param to the end of the time period
+     */
     public EventTask(String description, LocalDate from, LocalDate to) {
         super(description);
         this.from = from;

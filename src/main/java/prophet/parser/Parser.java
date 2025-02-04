@@ -15,10 +15,12 @@ public class Parser {
     /**
      * The Parser class takes in user input and interprets it to perform the necessary actions.
      */
-    private static final String horizontalLine = "--------------------------------------------------------------------------------\n";
+    private static final String horizontalLine = "----------------------------------" +
+            "----------------------------------------------\n";
 
     /**
      * Interprets command-line inputs and returns the command type according to keywords.
+     * @param ui the user interface of the chatbot
      * @param str the string representing the input
      * @return CommandType the type of command given in the input
      */
@@ -29,9 +31,11 @@ public class Parser {
         ArrayList<Command> commands = new ArrayList<>();
         switch (firstWord) {
         case "list":
+            // list all tasks
             commands.add(new ListCommand(CommandType.LIST));
             return commands;
         case "mark":
+            // mark task as done
             try {
                 String[] mark = str.split("mark ", 2);
                 if (mark.length < 2 || mark[1].isEmpty()) {
@@ -44,6 +48,7 @@ public class Parser {
                 ui.print("The number you keyed in was not an integer! Try again.");
             }
         case "unmark":
+            // mark task as not done
             try {
                 String[] unmark = str.split("unmark ", 2);
                 if (unmark.length < 2 || unmark[1].isEmpty()) {
@@ -56,6 +61,7 @@ public class Parser {
                 ui.print("The number you keyed in was not an integer! Try again.");
             }
         case "todo":
+            // add a todo task
             try {
                 String[] description = str.split("todo", 2);
                 if (description.length < 2 || description[1].trim().isEmpty()) {
@@ -87,6 +93,7 @@ public class Parser {
                 return commands;
             }
         case "deadline":
+            // add a deadline task
             try {
                 String[] description = str.split("deadline ", 2);
                 if (description.length < 2 || description[1].trim().isEmpty() || description[1].trim().startsWith("/by")) {
@@ -105,6 +112,7 @@ public class Parser {
                 return commands;
             }
         case "d":
+            // same as deadline, just with a different keyword from reading from save file
             try {
                 String[] description = str.split("D \\| ", 2);
                 if (description.length < 2 || description[1].trim().isEmpty() || description[1].trim().startsWith("by:")) {
@@ -129,6 +137,7 @@ public class Parser {
                 return commands;
             }
         case "event":
+            // add an event task
             try {
                 String[] description = str.split("event ", 2);
                 if (description.length < 2 || description[1].trim().isEmpty() || description[1].trim().startsWith("/from")) {
@@ -152,6 +161,7 @@ public class Parser {
                 return commands;
             }
         case "e":
+            // same as event, just with a different keyword from reading from save file
             try {
                 String[] description = str.split("E \\| ", 2);
                 if (description.length < 2 || description[1].trim().isEmpty() || description[1].trim().startsWith("/from")) {
@@ -181,6 +191,7 @@ public class Parser {
                 return commands;
             }
         case "delete":
+            // delete a task
             try {
                 String[] delete = str.split("delete ", 2);
                 if (delete.length < 2 || delete[1].isEmpty()) {
@@ -193,6 +204,7 @@ public class Parser {
                 ui.print("The number you keyed in was not an integer! Try again.");
             }
         default:
+            // unknown command
             commands.add(new UnknownCommand(CommandType.UNKNOWN));
             return commands;
         }
