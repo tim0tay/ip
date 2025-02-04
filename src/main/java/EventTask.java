@@ -1,12 +1,12 @@
-public class Event extends Task {
-    protected static final String type = "[E]";
+public class EventTask extends Task {
+    protected static final String type = "E | ";
     protected String from;
     protected String to;
 
-    public Event(String description, String from, String to) {
+    public EventTask(String description, String from, String to) {
         super(description);
-        this.from = "(from: " + from + " ";
-        this.to = "to: " + to + ")";
+        this.from = "from: " + from + " ";
+        this.to = "to: " + to;
     }
 
     /**
@@ -15,7 +15,7 @@ public class Event extends Task {
      */
     @Override
     public String getStatusIcon() {
-        return Event.type + super.getStatusIcon();
+        return EventTask.type + super.getStatusIcon();
     }
 
     /**
@@ -24,6 +24,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return this.getStatusIcon() + super.getTaskDescription() + this.from + this.to + "\n";
+        return this.getStatusIcon() + super.getTaskDescription()
+                + " " + this.from + " " + this.to + "\n";
     }
 }
