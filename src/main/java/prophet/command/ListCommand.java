@@ -12,10 +12,10 @@ public class ListCommand extends Command {
 
     /**
      * Initialises a newly created ListCommand object.
-     * @param command the type of command
+     * @param type the type of command
      */
-    public ListCommand(CommandType command) {
-        super(command);
+    public ListCommand(CommandType type) {
+        super(type);
     }
 
     /**

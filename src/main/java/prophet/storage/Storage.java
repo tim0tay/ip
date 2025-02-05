@@ -81,6 +81,15 @@ public class Storage {
     }
 
     /**
+     * Finds tasks that contain the keyword.
+     * @param keyword the keyword to search for
+     * @return the list of tasks that contain the keyword
+     */
+    public String findTasks(String keyword) {
+        return tasks.findTasks(keyword);
+    }
+
+    /**
      * Returns the length of the list of tasks.
      * @return the length of the list of tasks
      */

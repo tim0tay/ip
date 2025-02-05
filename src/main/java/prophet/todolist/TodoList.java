@@ -116,6 +116,21 @@ public class TodoList {
     }
 
     /**
+     * Finds tasks that contain the keyword.
+     * @param keyword the keyword to search for
+     * @return the list of tasks that contain the keyword
+     */
+    public String findTasks(String keyword) {
+        StringBuilder result = new StringBuilder("Here are the tasks that match: " + keyword + "\n");
+        for (Task task : this.list) {
+            if (task.getTaskDescription().contains(keyword)) {
+                result.append(task.toString());
+            }
+        }
+        return result.toString();
+    }
+
+    /**
      * Returns the size of the list.
      * @return the size of the list
      */

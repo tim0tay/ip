@@ -17,12 +17,12 @@ public class AddDeadlineCommand extends Command {
 
     /**
      * Initialises a newly created AddDeadlineCommand object.
-     * @param command the type of command
+     * @param type the type of command
      * @param taskDescription the description of the task
      * @param deadline the deadline of the task
      */
-    public AddDeadlineCommand(CommandType command, String taskDescription, LocalDate deadline) {
-        super(command);
+    public AddDeadlineCommand(CommandType type, String taskDescription, LocalDate deadline) {
+        super(type);
         this.taskDescription = taskDescription;
         this.deadline = deadline;
     }

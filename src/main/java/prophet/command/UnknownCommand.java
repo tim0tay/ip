@@ -15,10 +15,10 @@ public class UnknownCommand extends Command {
 
     /**
      * Initialises a newly created UnknownCommand object.
-     * @param command the type of command
+     * @param type the type of command
      */
-    public UnknownCommand(CommandType command) {
-        super(command);
+    public UnknownCommand(CommandType type) {
+        super(type);
     }
 
     /**

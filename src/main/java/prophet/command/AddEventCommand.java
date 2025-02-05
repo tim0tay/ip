@@ -18,13 +18,13 @@ public class AddEventCommand extends Command {
 
     /**
      * Initialises a newly created AddEventCommand object.
-     * @param command the type of command
+     * @param type the type of command
      * @param taskDescription the description of the task
      * @param from the start date of the event
      * @param to the end date of the event
      */
-    public AddEventCommand(CommandType command, String taskDescription, LocalDate from, LocalDate to) {
-        super(command);
+    public AddEventCommand(CommandType type, String taskDescription, LocalDate from, LocalDate to) {
+        super(type);
         this.taskDescription = taskDescription;
         this.from = from;
         this.to = to;

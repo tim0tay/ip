@@ -60,7 +60,7 @@ public class Parser {
                 ui.print("The number you keyed in was not an integer! Try again.");
             }
         case "todo":
-            // add a todo task
+            // add a to do task
             try {
                 String[] description = str.split("todo", 2);
                 if (description.length < 2 || description[1].trim().isEmpty()) {
@@ -206,6 +206,19 @@ public class Parser {
                 return commands;
             } catch (NumberFormatException e) {
                 ui.print("The number you keyed in was not an integer! Try again.");
+            }
+        case "find":
+            // find tasks with a keyword
+            try {
+                String[] keyword = str.split("find ", 2);
+                if (keyword.length < 2 || keyword[1].isEmpty()) {
+                    throw new NoDescriptionException();
+                }
+                commands.add(new FindTaskCommand(CommandType.FIND, keyword[1].trim()));
+                return commands;
+            } catch (NoDescriptionException e) {
+                commands.add(new UnknownCommand(CommandType.UNKNOWN));
+                return commands;
             }
         default:
             // unknown command
