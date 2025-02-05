@@ -13,11 +13,11 @@ public class MarkNotDoneCommand extends Command {
 
     /**
      * Initialises a newly created MarkNotDoneCommand object.
-     * @param command the type of command
+     * @param type the type of command
      * @param index the description of the task
      */
-    public MarkNotDoneCommand(CommandType command, int index) {
-        super(command);
+    public MarkNotDoneCommand(CommandType type, int index) {
+        super(type);
         this.index = index;
     }
 

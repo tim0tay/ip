@@ -14,11 +14,11 @@ public class DeleteTaskCommand extends Command {
 
     /**
      * Initialises a newly created DeleteTaskCommand object.
-     * @param command the type of command
+     * @param type the type of command
      * @param index the description of the task.
      */
-    public DeleteTaskCommand(CommandType command, int index) {
-        super(command);
+    public DeleteTaskCommand(CommandType type, int index) {
+        super(type);
         this.index = index;
     }
 

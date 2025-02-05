@@ -10,10 +10,10 @@ public abstract class Command {
      * The Command class represents commands that can be run by the chatbot.
      * To implement this class, extend this class and override the execute method.
      */
-    private final CommandType command;
+    private final CommandType type;
 
-    public Command(CommandType command) {
-        this.command = command;
+    public Command(CommandType type) {
+        this.type = type;
     }
 
     /**

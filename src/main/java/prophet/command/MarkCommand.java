@@ -13,11 +13,11 @@ public class MarkCommand extends Command {
 
     /**
      * Initialises a newly created MarkCommand object.
-     * @param command the type of command
+     * @param type the type of command
      * @param index the index of the task to be marked as done
      */
-    public MarkCommand(CommandType command, int index) {
-        super(command);
+    public MarkCommand(CommandType type, int index) {
+        super(type);
         this.index = index;
     }
 

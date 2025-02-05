@@ -14,11 +14,11 @@ public class AddToDoCommand extends Command {
 
     /**
      * Initialises a newly created AddToDoCommand object.
-     * @param command the type of command
+     * @param type the type of command
      * @param taskDescription the description of the task
      */
-    public AddToDoCommand(CommandType command, String taskDescription) {
-        super(command);
+    public AddToDoCommand(CommandType type, String taskDescription) {
+        super(type);
         this.taskDescription = taskDescription;
     }
 
