@@ -69,7 +69,7 @@ public class TodoList {
     public String setDone(int taskNumber) throws IndexOutOfBoundsException {
         try {
             this.list.get(taskNumber).setDone();
-            StringBuilder result = new StringBuilder("Done! Good job.\n");
+            StringBuilder result = new StringBuilder("Marked done! Good job.\n");
             result.append(this.list.get(taskNumber).getStatusIcon())
                     .append(this.list.get(taskNumber).getTaskDescription()).append("\n");
             return result.toString();
@@ -106,7 +106,7 @@ public class TodoList {
         try {
             Task task = this.list.get(taskNumber);
             this.list.remove(taskNumber);
-            StringBuilder result = new StringBuilder("The following task was removed: \n");
+            StringBuilder result = new StringBuilder("The following task was deleted: \n");
             result.append(task.getStatusIcon())
                     .append(task.getTaskDescription()).append("\n");
             return result.toString();

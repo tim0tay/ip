@@ -2,7 +2,7 @@ package prophet.command;
 
 import prophet.task.EventTask;
 import prophet.storage.Storage;
-import prophet.ui.Ui;
+import prophet.gui.Ui;
 
 import java.time.LocalDate;
 
@@ -10,8 +10,6 @@ public class AddEventCommand extends Command {
     /**
      * The AddEventCommand class represents the command to add an event task.
      */
-    private static final String HORIZONTAL_LINE = "----------------------------------"
-            + "----------------------------------------------\n";
     private final String taskDescription;
     private final LocalDate from;
     private final LocalDate to;
@@ -35,11 +33,12 @@ public class AddEventCommand extends Command {
      * Prints out the confirmation message or the error message.
      * @param ui the user interface of the chatbot
      * @param storage the storage of tasks accumulated as the chatbot runs
+     * @return the message to be printed
      */
     @Override
-    public void execute(Ui ui, Storage storage) {
+    public String execute(Ui ui, Storage storage) {
         EventTask newTask = new EventTask(this.taskDescription, this.from, this.to);
         String added = storage.addToList(newTask);
-        ui.print(HORIZONTAL_LINE + added + "\n" + HORIZONTAL_LINE);
+        return ui.print(added + "\n");
     }
 }

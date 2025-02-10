@@ -4,7 +4,7 @@ import prophet.Prophet;
 import prophet.command.*;
 import prophet.exception.InvalidTaskNumberException;
 import prophet.exception.NoDescriptionException;
-import prophet.ui.Ui;
+import prophet.gui.Ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

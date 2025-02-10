@@ -2,7 +2,7 @@ package prophet.command;
 
 import prophet.task.DeadlineTask;
 import prophet.storage.Storage;
-import prophet.ui.Ui;
+import prophet.gui.Ui;
 
 import java.time.LocalDate;
 
@@ -10,8 +10,6 @@ public class AddDeadlineCommand extends Command {
     /**
      * The AddDeadlineCommand class represents the command to add a deadline task.
      */
-    private static final String HORIZONTAL_LINE = "-------------------------------------------"
-            + "-------------------------------------\n";
     private final String taskDescription;
     private final LocalDate deadline;
 
@@ -31,11 +29,12 @@ public class AddDeadlineCommand extends Command {
      * Adds a deadline task to the list of tasks.
      * @param ui the user interface of the chatbot
      * @param storage the storage of tasks
+     * @return the message to be printed
      */
     @Override
-    public void execute(Ui ui, Storage storage) {
+    public String execute(Ui ui, Storage storage) {
         DeadlineTask newTask = new DeadlineTask(this.taskDescription, this.deadline);
         String added = storage.addToList(newTask);
-        ui.print(HORIZONTAL_LINE + added + "\n" + HORIZONTAL_LINE);
+        return ui.print(added + "\n");
     }
 }

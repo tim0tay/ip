@@ -1,7 +1,7 @@
 package prophet.command;
 
 import prophet.storage.Storage;
-import prophet.ui.Ui;
+import prophet.gui.Ui;
 
 public class FindTaskCommand extends Command {
     /**
@@ -24,9 +24,12 @@ public class FindTaskCommand extends Command {
      * Executes the command to find tasks.
      * @param ui the user interface
      * @param storage the storage of tasks
+    * @return the message to be printed
      */
     @Override
-    public void execute(Ui ui, Storage storage) {
-        ui.print(storage.findTasks(this.keyword));
+    public String execute(Ui ui, Storage storage) {
+        return ui.print(storage.findTasks(this.keyword).isEmpty()
+                ? storage.findTasks(this.keyword)
+                : storage.findTasks(this.keyword) + "\nNone of the tasks contain what you have entered!");
     }
 }

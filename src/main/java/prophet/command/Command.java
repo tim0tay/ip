@@ -3,7 +3,7 @@ package prophet.command;
 import prophet.exception.InvalidTaskNumberException;
 import prophet.exception.NoDescriptionException;
 import prophet.storage.Storage;
-import prophet.ui.Ui;
+import prophet.gui.Ui;
 
 public abstract class Command {
     /**
@@ -21,5 +21,5 @@ public abstract class Command {
      * @param ui the user interface of the chatbot
      * @param storage the storage of tasks accumulated as the chatbot runs
      */
-    public abstract void execute(Ui ui, Storage storage) throws InvalidTaskNumberException, NoDescriptionException;
+    public abstract String execute(Ui ui, Storage storage) throws InvalidTaskNumberException, NoDescriptionException;
 }

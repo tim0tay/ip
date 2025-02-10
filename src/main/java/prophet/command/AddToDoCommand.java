@@ -2,14 +2,12 @@ package prophet.command;
 
 import prophet.storage.Storage;
 import prophet.task.ToDoTask;
-import prophet.ui.Ui;
+import prophet.gui.Ui;
 
 public class AddToDoCommand extends Command {
     /**
      * The AddToDoCommand class represents the command to add a to-do task.
      */
-    private static final String HORIZONTAL_LINE = "-------------------------------------"
-            + "-------------------------------------------\n";
     private final String taskDescription;
 
     /**
@@ -27,11 +25,12 @@ public class AddToDoCommand extends Command {
      * Prints out the confirmation message or the error message.
      * @param ui the user interface of the chatbot
      * @param storage the storage of tasks accumulated as the chatbot runs
+     * @return the message to be printed
      */
     @Override
-    public void execute(Ui ui, Storage storage) {
+    public String execute(Ui ui, Storage storage) {
         ToDoTask newTask = new ToDoTask(this.taskDescription);
         String added = storage.addToList(newTask);
-        ui.print(HORIZONTAL_LINE + added + "\n" + HORIZONTAL_LINE);
+        return ui.print(added + "\n");
     }
 }
