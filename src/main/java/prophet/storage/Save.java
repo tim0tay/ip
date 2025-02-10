@@ -4,7 +4,7 @@ import prophet.command.Command;
 import prophet.exception.InvalidTaskNumberException;
 import prophet.exception.NoDescriptionException;
 import prophet.parser.Parser;
-import prophet.ui.Ui;
+import prophet.gui.Ui;
 
 import java.io.File;
 import java.io.FileWriter;
