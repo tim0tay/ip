@@ -1,15 +1,14 @@
 package prophet.command;
 
-import prophet.task.DeadlineTask;
-import prophet.storage.Storage;
-import prophet.gui.Ui;
-
 import java.time.LocalDate;
+import prophet.gui.Ui;
+import prophet.storage.Storage;
+import prophet.task.DeadlineTask;
 
+/**
+ * The AddDeadlineCommand class represents the command to add a deadline task.
+ */
 public class AddDeadlineCommand extends Command {
-    /**
-     * The AddDeadlineCommand class represents the command to add a deadline task.
-     */
     private final String taskDescription;
     private final LocalDate deadline;
 

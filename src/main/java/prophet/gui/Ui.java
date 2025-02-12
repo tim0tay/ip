@@ -2,10 +2,10 @@ package prophet.gui;
 
 import java.util.Scanner;
 
+/**
+ * The Ui class represents the user interface of the chatbot.
+ */
 public class Ui {
-    /**
-     * The Ui class represents the user interface of the chatbot.
-     */
     private final Scanner scanner;
 
     /**
@@ -20,7 +20,7 @@ public class Ui {
      * @return the welcome message when Prophet is started up
      */
     public static String greetHello() {
-        return("Hi! Welcome to the Daily Prophet! You can call me Prophet for short.\n"
+        return ("Hi! Welcome to the Daily Prophet! You can call me Prophet for short.\n"
                 + "For now, I can keep track of your tasks."
                 + "I can do the following: \n"
                 + "1. Add tasks (keywords are todo, deadline or event)\n"
@@ -36,7 +36,7 @@ public class Ui {
      * @return the goodbye message when 'bye' is inputted
      */
     public static String greetGoodbye() {
-        return("Bye! Hope to see you again!\n");
+        return ("Bye! Hope to see you again!\n");
     }
 
     /**
@@ -53,6 +53,6 @@ public class Ui {
      * @return the message to be printed. It is returned to the GUI Main Window
      */
     public String print(String message) {
-        return(message);
+        return (message);
     }
 }

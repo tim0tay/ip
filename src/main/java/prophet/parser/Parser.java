@@ -1,20 +1,29 @@
 package prophet.parser;
 
+import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import prophet.Prophet;
-import prophet.command.*;
+import prophet.command.AddDeadlineCommand;
+import prophet.command.AddEventCommand;
+import prophet.command.AddToDoCommand;
+import prophet.command.Command;
+import prophet.command.CommandType;
+import prophet.command.DeleteTaskCommand;
+import prophet.command.FindTaskCommand;
+import prophet.command.ListCommand;
+import prophet.command.MarkCommand;
+import prophet.command.MarkNotDoneCommand;
+import prophet.command.UnknownCommand;
 import prophet.exception.InvalidTaskNumberException;
 import prophet.exception.NoDescriptionException;
 import prophet.gui.Ui;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-
+/**
+ * The Parser class takes in user input and interprets it to perform the necessary actions.
+ */
 public class Parser {
-    /**
-     * The Parser class takes in user input and interprets it to perform the necessary actions.
-     */
 
     /**
      * Interprets command-line inputs and returns the command type according to keywords.
@@ -45,6 +54,7 @@ public class Parser {
                 return commands;
             } catch (NumberFormatException e) {
                 ui.print("The number you keyed in was not an integer! Try again.");
+                return commands;
             }
         case "unmark":
             // mark task as not done
@@ -58,6 +68,7 @@ public class Parser {
                 return commands;
             } catch (NumberFormatException e) {
                 ui.print("The number you keyed in was not an integer! Try again.");
+                return commands;
             }
         case "todo":
             // add a to do task
@@ -99,7 +110,7 @@ public class Parser {
                         || description[1].trim().startsWith("/by")) {
                     throw new NoDescriptionException();
                 }
-                String[] remainingParts = description[1].split("/by",2);
+                String[] remainingParts = description[1].split("/by", 2);
                 if (remainingParts.length < 2 || remainingParts[1].trim().isEmpty()) {
                     throw new NoDescriptionException();
                 }
@@ -122,7 +133,7 @@ public class Parser {
                 String status = description[1].substring(0, 3);
                 String[] statusAndDescription = description[1].split("]", 2);
                 boolean isDone = status.equals("[X]");
-                String[] remainingParts = statusAndDescription[1].split("by: ",2);
+                String[] remainingParts = statusAndDescription[1].split("by: ", 2);
                 if (remainingParts.length < 2 || remainingParts[1].trim().isEmpty()) {
                     throw new NoDescriptionException();
                 }
@@ -146,11 +157,11 @@ public class Parser {
                         || description[1].trim().startsWith("/from")) {
                     throw new NoDescriptionException();
                 }
-                String[] remainingParts = description[1].split("/from ",2);
+                String[] remainingParts = description[1].split("/from ", 2);
                 if (remainingParts.length < 2 || remainingParts[1].trim().isEmpty()) {
                     throw new NoDescriptionException();
                 }
-                String[] timeline = remainingParts[1].split("/to ",2);
+                String[] timeline = remainingParts[1].split("/to ", 2);
                 if (timeline.length < 2 || timeline[1].trim().isEmpty()) {
                     throw new NoDescriptionException();
                 }
@@ -174,11 +185,11 @@ public class Parser {
                 String status = description[1].substring(0, 3);
                 String[] statusAndDescription = description[1].split("]", 2);
                 boolean isDone = status.equals("[X]");
-                String[] remainingParts = statusAndDescription[1].split("from: ",2);
+                String[] remainingParts = statusAndDescription[1].split("from: ", 2);
                 if (remainingParts.length < 2 || remainingParts[1].trim().isEmpty()) {
                     throw new NoDescriptionException();
                 }
-                String[] timeline = remainingParts[1].trim().split("to: ",2);
+                String[] timeline = remainingParts[1].trim().split("to: ", 2);
                 if (timeline.length < 2 || timeline[1].trim().isEmpty()) {
                     throw new NoDescriptionException();
                 }
@@ -206,6 +217,7 @@ public class Parser {
                 return commands;
             } catch (NumberFormatException e) {
                 ui.print("The number you keyed in was not an integer! Try again.");
+                return commands;
             }
         case "find":
             // find tasks with a keyword

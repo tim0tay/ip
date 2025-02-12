@@ -1,11 +1,10 @@
 package prophet.exception;
 
+/**
+ * The InvalidTaskNumberException class is a custom exception that is
+ * thrown when the user inputs an invalid task number (ie. a non-integer).
+ */
 public class InvalidTaskNumberException extends ProphetException {
-    /**
-     * The InvalidTaskNumberException class is a custom exception that is
-     * thrown when the user inputs an invalid task number (ie. a non-integer).
-     */
-
     protected String message;
 
     /**

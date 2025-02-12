@@ -28,6 +28,9 @@ public class MainWindow extends AnchorPane {
     private Image prophetImage = new Image(this.getClass().getResourceAsStream("/images/prophet.jpeg"));
 
     @FXML
+    /**
+     * Initialises the main window.
+     */
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
@@ -41,8 +44,8 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Prophet's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing Prophet's reply
+     * and then appends them to the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {

@@ -1,12 +1,12 @@
 package prophet.command;
 
-import prophet.storage.Storage;
 import prophet.gui.Ui;
+import prophet.storage.Storage;
 
+/**
+ *  The MarkCommand class represents the command to mark a task as done.
+ */
 public class MarkCommand extends Command {
-    /**
-     *  The MarkCommand class represents the command to mark a task as done.
-     */
     private final int index;
 
     /**

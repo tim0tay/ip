@@ -1,13 +1,13 @@
 package prophet.command;
 
+import prophet.gui.Ui;
 import prophet.storage.Storage;
 import prophet.task.ToDoTask;
-import prophet.gui.Ui;
 
+/**
+ * The AddToDoCommand class represents the command to add a to-do task.
+ */
 public class AddToDoCommand extends Command {
-    /**
-     * The AddToDoCommand class represents the command to add a to-do task.
-     */
     private final String taskDescription;
 
     /**

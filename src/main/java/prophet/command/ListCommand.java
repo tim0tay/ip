@@ -1,13 +1,12 @@
 package prophet.command;
 
-import prophet.storage.Storage;
 import prophet.gui.Ui;
+import prophet.storage.Storage;
 
+/**
+ * The ListCommand class represents a command to list all tasks in the chatbot.
+ */
 public class ListCommand extends Command {
-    /**
-     * The ListCommand class represents a command to list all tasks in the chatbot.
-     */
-
     /**
      * Initialises a newly created ListCommand object.
      * @param type the type of command

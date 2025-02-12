@@ -1,10 +1,9 @@
 package prophet.task;
 
+/**
+ * The ToDoTask class represents a task that needs to be done.
+ */
 public class ToDoTask extends Task {
-    /**
-     * The ToDoTask class represents a task that needs to be done.
-     */
-
     protected static final String TYPE = "T | ";
 
     /**

@@ -1,13 +1,13 @@
 package prophet.command;
 
 import prophet.exception.InvalidTaskNumberException;
-import prophet.storage.Storage;
 import prophet.gui.Ui;
+import prophet.storage.Storage;
 
+/**
+ * The DeleteTaskCommand class represents the command to delete a task from the chatbot.
+ */
 public class DeleteTaskCommand extends Command {
-    /**
-     * The DeleteTaskCommand class represents the command to delete a task from the chatbot.
-     */
     private final int index;
 
     /**

@@ -3,10 +3,11 @@ package prophet.storage;
 import prophet.task.Task;
 import prophet.todolist.TodoList;
 
+/**
+ * The Storage class represents the storage of tasks accumulated as the chatbot runs.
+ */
 public class Storage {
-    /**
-     * The Storage class represents the storage of tasks accumulated as the chatbot runs.
-     */
+
     private final TodoList tasks;
 
     /**

@@ -1,13 +1,12 @@
 package prophet.command;
 
-import prophet.storage.Storage;
 import prophet.gui.Ui;
+import prophet.storage.Storage;
 
+/**
+ * The FindTaskCommand class represents a command to find tasks.
+ */
 public class FindTaskCommand extends Command {
-    /**
-     * The FindTaskCommand class represents a command to find tasks.
-     */
-
     private String keyword;
 
     /**

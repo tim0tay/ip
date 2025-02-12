@@ -1,12 +1,12 @@
 package prophet.command;
 
-import prophet.storage.Storage;
 import prophet.gui.Ui;
+import prophet.storage.Storage;
 
+/**
+ * The MarkNotDoneCommand class represents the command to mark a task as not done.
+ */
 public class MarkNotDoneCommand extends Command {
-    /**
-     * The MarkNotDoneCommand class represents the command to mark a task as not done.
-     */
     private final int index;
 
     /**
