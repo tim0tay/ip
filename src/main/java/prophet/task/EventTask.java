@@ -3,11 +3,10 @@ package prophet.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The EventTask class represents a task that spans a period of time.
+ */
 public class EventTask extends Task {
-    /**
-     * The EventTask class represents a task that spans a period of time.
-     */
-
     protected static final String TYPE = "E | ";
     protected LocalDate from;
     protected LocalDate to;

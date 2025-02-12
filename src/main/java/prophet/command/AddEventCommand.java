@@ -1,15 +1,14 @@
 package prophet.command;
 
-import prophet.task.EventTask;
-import prophet.storage.Storage;
-import prophet.gui.Ui;
-
 import java.time.LocalDate;
+import prophet.gui.Ui;
+import prophet.storage.Storage;
+import prophet.task.EventTask;
 
+/**
+ * The AddEventCommand class represents the command to add an event task.
+ */
 public class AddEventCommand extends Command {
-    /**
-     * The AddEventCommand class represents the command to add an event task.
-     */
     private final String taskDescription;
     private final LocalDate from;
     private final LocalDate to;

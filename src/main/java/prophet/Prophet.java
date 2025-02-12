@@ -1,18 +1,19 @@
 package prophet;
 
+import java.util.ArrayList;
+
 import prophet.command.Command;
 import prophet.exception.ProphetException;
+import prophet.gui.Ui;
 import prophet.parser.Parser;
 import prophet.storage.Save;
 import prophet.storage.Storage;
-import prophet.gui.Ui;
 
-import java.util.ArrayList;
+/**
+ * The Prophet class is the main class that runs the chatbot.
+ */
+
 public class Prophet {
-    /**
-     * The Prophet class is the main class that runs the chatbot.
-     */
-
     private static Storage storage;
     private static Ui ui;
 
@@ -34,26 +35,26 @@ public class Prophet {
     }
 
     public static void main(String[] args) {
-//        Prophet.storage = new Storage();
-//        Ui ui = new Ui();
-//        Save.load(ui, Prophet.storage);
-//        Ui.greetHello();
-//        String str = ui.run();
-//        while (!str.equalsIgnoreCase("bye")) {
-//            try {
-//                ArrayList<Command> command = Parser.parse(ui, str);
-//                for (Command c : command) {
-//                    c.execute(ui, Prophet.storage);
-//                }
-//            } catch (ProphetException e) {
-//                System.out.println(e);
-//            }
-//            finally {
-//                str = ui.run();
-//            }
-//        }
-//        Save.save(ui, Prophet.storage);
-//        Ui.greetGoodbye();
+    //        Prophet.storage = new Storage();
+    //        Ui ui = new Ui();
+    //        Save.load(ui, Prophet.storage);
+    //        Ui.greetHello();
+    //        String str = ui.run();
+    //        while (!str.equalsIgnoreCase("bye")) {
+    //            try {
+    //                ArrayList<Command> command = Parser.parse(ui, str);
+    //                for (Command c : command) {
+    //                    c.execute(ui, Prophet.storage);
+    //                }
+    //            } catch (ProphetException e) {
+    //                System.out.println(e);
+    //            }
+    //            finally {
+    //                str = ui.run();
+    //            }
+    //        }
+    //        Save.save(ui, Prophet.storage);
+    //        Ui.greetGoodbye();
     }
 
     /**

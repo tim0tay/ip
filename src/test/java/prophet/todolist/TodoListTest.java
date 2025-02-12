@@ -1,9 +1,9 @@
 package prophet.todolist;
 
-import org.junit.jupiter.api.Test;
 import prophet.task.ToDoTask;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class TodoListTest {
     @Test

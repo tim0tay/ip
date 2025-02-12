@@ -1,21 +1,20 @@
 package prophet.storage;
 
-import prophet.command.Command;
-import prophet.exception.InvalidTaskNumberException;
-import prophet.exception.NoDescriptionException;
-import prophet.parser.Parser;
-import prophet.gui.Ui;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import prophet.command.Command;
+import prophet.exception.InvalidTaskNumberException;
+import prophet.exception.NoDescriptionException;
+import prophet.gui.Ui;
+import prophet.parser.Parser;
 
+/**
+ * The Save class helps to save to and retrieve tasks from a file.
+ */
 public class Save {
-    /**
-     * The Save class helps to save to and retrieve tasks from a file.
-     */
     private static final String FILE_PATH = "data";
     private static final String SAVE_PATH = "data/tasks.txt";
 

@@ -2,14 +2,14 @@ package prophet.command;
 
 import prophet.exception.InvalidTaskNumberException;
 import prophet.exception.NoDescriptionException;
-import prophet.storage.Storage;
 import prophet.gui.Ui;
+import prophet.storage.Storage;
 
+/**
+ * The Command class represents commands that can be run by the chatbot.
+ * To implement this class, extend this class and override the execute method.
+ */
 public abstract class Command {
-    /**
-     * The Command class represents commands that can be run by the chatbot.
-     * To implement this class, extend this class and override the execute method.
-     */
     private final CommandType type;
 
     public Command(CommandType type) {

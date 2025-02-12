@@ -3,10 +3,10 @@ package prophet.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The DeadlineTask class represents a task with a deadline.
+ */
 public class DeadlineTask extends Task {
-    /**
-     * The DeadlineTask class represents a task with a deadline.
-     */
 
     protected static final String TYPE = "D | ";
     protected LocalDate deadline;

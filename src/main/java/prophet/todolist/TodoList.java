@@ -1,13 +1,13 @@
 package prophet.todolist;
 
-import prophet.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+import prophet.task.Task;
+
+/**
+ * The TodoList class represents a list of tasks that the user has to do.
+ */
 public class TodoList {
-    /**
-     * The TodoList class represents a list of tasks that the user has to do.
-     */
 
     private final List<Task> list;
 
@@ -38,7 +38,7 @@ public class TodoList {
     public String enumerateList() {
         StringBuilder result = new StringBuilder("Let's see what you have on your plate:\n");
         for (int i = 0; i < this.list.size(); i++) {
-            result.append(i+1).append(". ").append(this.list.get(i).toString());
+            result.append(i + 1).append(". ").append(this.list.get(i).toString());
         }
         if (this.list.isEmpty()) {
             result.append("So gewd ah.. nothing to do!\n");
@@ -63,8 +63,8 @@ public class TodoList {
     /**
      * Marks a specified task done. The specified task number cannot be larger than the list size or negative.
      * @param taskNumber the task to be marked done
-     * @throws IndexOutOfBoundsException if the task number is invalid
      * @return the string that confirms successful marking of the task
+     * @throws IndexOutOfBoundsException if the task number is invalid
      */
     public String setDone(int taskNumber) throws IndexOutOfBoundsException {
         try {
@@ -81,8 +81,8 @@ public class TodoList {
     /**
      * Marks a specified task not done. The specified task number cannot be larger than the list size or negative.
      * @param taskNumber the task to be marked not done
-     * @throws IndexOutOfBoundsException if the task number is invalid
      * @return the string that confirms successful marking of the task
+     * @throws IndexOutOfBoundsException if the task number is invalid
      */
     public String setNotDone(int taskNumber) throws IndexOutOfBoundsException {
         try {
@@ -99,8 +99,8 @@ public class TodoList {
     /**
      * Removes the input task from the list of things to do.
      * @param  taskNumber the task description
-     * @throws IndexOutOfBoundsException if the task number is invalid
      * @return the confirmation string that indicates successful removal
+     * @throws IndexOutOfBoundsException if the task number is invalid
      */
     public String deleteTask(int taskNumber) throws IndexOutOfBoundsException {
         try {

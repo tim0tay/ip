@@ -1,10 +1,9 @@
 package prophet.exception;
 
+/**
+ * The ProphetException class is an exception type unique to Prophet.
+ */
 public class ProphetException extends Exception {
-    /**
-     * The ProphetException class is an exception type unique to Prophet.
-     */
-
     protected String message;
 
     /**

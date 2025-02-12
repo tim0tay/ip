@@ -1,9 +1,9 @@
 package prophet.task;
 
+/**
+ * The Task class represents a task with a description and a status.
+ */
 public class Task {
-    /**
-     * The Task class represents a task with a description and a status.
-     */
 
     protected String description;
     protected boolean isDone;
