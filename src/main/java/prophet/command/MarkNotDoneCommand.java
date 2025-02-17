@@ -28,11 +28,6 @@ public class MarkNotDoneCommand extends Command {
      */
     @Override
     public String execute(Ui ui, Storage storage) {
-<<<<<<< HEAD
         return storage.setNotDone(index);
-=======
-        String unmarked = storage.setNotDone(index);
-        return ui.print(unmarked + "\n");
->>>>>>> master
     }
 }
