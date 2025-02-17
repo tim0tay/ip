@@ -23,7 +23,6 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(Ui ui, Storage storage) {
-        String list = storage.enumerateList();
-        return ui.print(list + "\n");
+        return storage.enumerateList();
     }
 }

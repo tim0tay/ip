@@ -55,7 +55,7 @@ public class Save {
             Scanner sc = new Scanner(saveFile);
             while (sc.hasNextLine()) {
                 String task = sc.nextLine();
-                ArrayList<Command> loadedCommands = Parser.parse(ui, task);
+                ArrayList<Command> loadedCommands = Parser.parse(task);
                 for (Command command : loadedCommands) {
                     command.execute(ui, storage);
                 }

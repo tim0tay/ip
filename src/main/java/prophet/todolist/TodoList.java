@@ -42,7 +42,8 @@ public class TodoList {
         }
         if (this.list.isEmpty()) {
             result.append("So gewd ah.. nothing to do!\n");
-        } else if (this.list.size() > 4) {
+        }
+        if (this.list.size() > 4) {
             result.append("Seems like you have quite a few things to do.. go easy on yourself!\n");
         }
         return result.toString();

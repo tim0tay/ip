@@ -28,7 +28,6 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(Ui ui, Storage storage) {
-        String marked = storage.setDone(index);
-        return ui.print(marked + "\n");
+        return storage.setDone(index);
     }
 }
