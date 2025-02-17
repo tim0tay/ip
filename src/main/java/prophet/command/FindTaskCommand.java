@@ -27,8 +27,6 @@ public class FindTaskCommand extends Command {
      */
     @Override
     public String execute(Ui ui, Storage storage) {
-        return ui.print(storage.findTasks(this.keyword).isEmpty()
-                ? storage.findTasks(this.keyword)
-                : storage.findTasks(this.keyword) + "\nNone of the tasks contain what you have entered!");
+        return storage.findTasks(this.keyword);
     }
 }
