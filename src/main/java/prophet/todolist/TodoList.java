@@ -28,7 +28,8 @@ public class TodoList {
             return "Please.. don't make me work harder than I have to!\n";
         }
         this.list.add(newTask);
-        return "Task added to list: " + newTask.toString();
+        assert !this.list.isEmpty() : "List should never be empty";
+        return "Task added to list: " + newTask;
     }
 
     /**

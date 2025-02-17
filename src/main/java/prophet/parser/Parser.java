@@ -53,7 +53,6 @@ public class Parser {
                 commands.add(new MarkCommand(CommandType.MARK, index));
                 return commands;
             } catch (NumberFormatException e) {
-                ui.print("The number you keyed in was not an integer! Try again.");
                 return commands;
             }
         case "unmark":
@@ -67,7 +66,6 @@ public class Parser {
                 commands.add(new MarkNotDoneCommand(CommandType.UNMARK, index));
                 return commands;
             } catch (NumberFormatException e) {
-                ui.print("The number you keyed in was not an integer! Try again.");
                 return commands;
             }
         case "todo":
