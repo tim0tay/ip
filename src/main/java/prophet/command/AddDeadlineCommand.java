@@ -34,6 +34,7 @@ public class AddDeadlineCommand extends Command {
     public String execute(Ui ui, Storage storage) {
         DeadlineTask newTask = new DeadlineTask(this.taskDescription, this.deadline);
         String added = storage.addToList(newTask);
+        assert added.equals("Task added to list: " + newTask) : "Task should always be added successfully";
         return ui.print(added + "\n");
     }
 }

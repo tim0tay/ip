@@ -7,7 +7,7 @@ import prophet.storage.Storage;
  * The FindTaskCommand class represents a command to find tasks.
  */
 public class FindTaskCommand extends Command {
-    private String keyword;
+    private final String keyword;
 
     /**
      * Initialises a newly created FindTaskCommand object with a keyword.

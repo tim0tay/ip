@@ -36,7 +36,10 @@ public class Prophet {
     }
 
     public static void main(String[] args) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     }
 
     /**

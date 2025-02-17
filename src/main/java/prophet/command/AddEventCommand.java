@@ -38,6 +38,7 @@ public class AddEventCommand extends Command {
     public String execute(Ui ui, Storage storage) {
         EventTask newTask = new EventTask(this.taskDescription, this.from, this.to);
         String added = storage.addToList(newTask);
+        assert added.equals("Task added to list: " + newTask) : "Task should always be added successfully";
         return ui.print(added + "\n");
     }
 }
