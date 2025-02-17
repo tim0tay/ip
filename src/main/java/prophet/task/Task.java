@@ -5,8 +5,8 @@ package prophet.task;
  */
 public class Task {
 
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Initialises a newly created Task object with a description and a status.

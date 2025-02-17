@@ -31,6 +31,7 @@ public class AddToDoCommand extends Command {
     public String execute(Ui ui, Storage storage) {
         ToDoTask newTask = new ToDoTask(this.taskDescription);
         String added = storage.addToList(newTask);
+        assert added.equals("Task added to list: " + newTask) : "Task should always be added successfully";
         return ui.print(added + "\n");
     }
 }

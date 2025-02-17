@@ -35,26 +35,6 @@ public class Prophet {
     }
 
     public static void main(String[] args) {
-    //        Prophet.storage = new Storage();
-    //        Ui ui = new Ui();
-    //        Save.load(ui, Prophet.storage);
-    //        Ui.greetHello();
-    //        String str = ui.run();
-    //        while (!str.equalsIgnoreCase("bye")) {
-    //            try {
-    //                ArrayList<Command> command = Parser.parse(ui, str);
-    //                for (Command c : command) {
-    //                    c.execute(ui, Prophet.storage);
-    //                }
-    //            } catch (ProphetException e) {
-    //                System.out.println(e);
-    //            }
-    //            finally {
-    //                str = ui.run();
-    //            }
-    //        }
-    //        Save.save(ui, Prophet.storage);
-    //        Ui.greetGoodbye();
     }
 
     /**
