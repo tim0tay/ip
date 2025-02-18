@@ -1,5 +1,7 @@
 package prophet.storage;
 
+import java.time.LocalDate;
+
 import prophet.task.Task;
 import prophet.todolist.TodoList;
 
@@ -96,5 +98,14 @@ public class Storage {
      */
     public int getListSize() {
         return tasks.getListSize();
+    }
+
+    /**
+     * Finds tasks that match the {@link LocalDate} given.
+     * @param date the date to search for
+     * @return the tasks that match the date
+     */
+    public String findTasksByDate(LocalDate date) {
+        return tasks.findTasksByDate(date);
     }
 }

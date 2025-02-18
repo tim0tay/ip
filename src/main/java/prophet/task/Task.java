@@ -1,5 +1,7 @@
 package prophet.task;
 
+import java.time.LocalDate;
+
 /**
  * The Task class represents a task with a description and a status.
  */
@@ -15,6 +17,14 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    /**
+     * Checks if the task is due on the given date.
+     * @param date the date to check against
+     */
+    public boolean isDueOn(LocalDate date) {
+        return false;
     }
 
     /**

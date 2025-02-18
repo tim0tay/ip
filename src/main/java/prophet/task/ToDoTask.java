@@ -4,7 +4,7 @@ package prophet.task;
  * The ToDoTask class represents a task that needs to be done.
  */
 public class ToDoTask extends Task {
-    protected static final String TYPE = "T | ";
+    private static final String TYPE = "T | ";
 
     /**
      * Initialises a newly created ToDoTask object with a description.

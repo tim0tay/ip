@@ -1,8 +1,12 @@
 package prophet.todolist;
 
+import java.time.LocalDate;
 import java.util.stream.Stream;
 import java.util.ArrayList;
 import java.util.List;
+
+import prophet.task.DeadlineTask;
+import prophet.task.EventTask;
 import prophet.task.Task;
 
 /**
@@ -155,5 +159,16 @@ public class TodoList {
         int listSize = taskList.size();
         this.taskStream = taskList.stream();
         return listSize;
+    }
+
+    public String findTasksByDate(LocalDate date) {
+        StringBuilder result = new StringBuilder("Here are the tasks that are on : " + date + "\n");
+        List<Task> taskList = this.taskStream.toList();
+        taskList.stream().filter(
+                c -> c.getClass() == DeadlineTask.class || c.getClass() == EventTask.class)
+                         .filter(c -> c.isDueOn(date))
+                         .forEach(c -> result.append(c.toString()));
+        this.taskStream = taskList.stream();
+        return result.toString();
     }
 }

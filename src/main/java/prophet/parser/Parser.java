@@ -15,6 +15,7 @@ import prophet.command.FindTaskCommand;
 import prophet.command.ListCommand;
 import prophet.command.MarkCommand;
 import prophet.command.MarkNotDoneCommand;
+import prophet.command.ScheduleCommand;
 import prophet.command.UnknownCommand;
 import prophet.exception.InvalidTaskNumberException;
 import prophet.exception.NoDescriptionException;
@@ -58,6 +59,8 @@ public class Parser {
            return Parser.addDeleteCommand(commands, str);
         case "find":
             return Parser.addFindCommand(commands, str);
+        case "schedule":
+            return Parser.addScheduleCommand(commands, str);
         default:
             Stream<Command> unknownCommand = Stream.of(new UnknownCommand(CommandType.UNKNOWN));
             return Stream.concat(commands, unknownCommand);
@@ -108,7 +111,7 @@ public class Parser {
             Stream<Command> newCommand = Stream.of(new MarkCommand(CommandType.MARK, index));
             return Stream.concat(commands, newCommand);
         } catch (NoDescriptionException e) {
-            throw new InvalidTaskNumberException();
+            return Stream.concat(commands, Stream.of(new UnknownCommand(CommandType.UNKNOWN)));
         }
     }
 
@@ -127,7 +130,7 @@ public class Parser {
             Stream<Command> newCommand = Stream.of(new MarkNotDoneCommand(CommandType.UNMARK, index));
             return Stream.concat(commands, newCommand);
         } catch (NoDescriptionException e) {
-            throw new InvalidTaskNumberException();
+            return Stream.concat(commands, Stream.of(new UnknownCommand(CommandType.UNKNOWN)));
         }
     }
 
@@ -145,7 +148,7 @@ public class Parser {
             Stream<Command> newCommand = Stream.of(new AddToDoCommand(CommandType.TODO, todo[1].trim()));
             return Stream.concat(commands, newCommand);
         } catch (NoDescriptionException e) {
-            throw new NoDescriptionException();
+            return Stream.concat(commands, Stream.of(new UnknownCommand(CommandType.UNKNOWN)));
         }
     }
 
@@ -171,7 +174,7 @@ public class Parser {
             }
             return Stream.concat(commands, newCommand);
         } catch (NoDescriptionException e) {
-            throw new NoDescriptionException();
+            return Stream.concat(commands, Stream.of(new UnknownCommand(CommandType.UNKNOWN)));
         }
     }
 
@@ -195,7 +198,7 @@ public class Parser {
                     new AddDeadlineCommand(CommandType.DEADLINE, todoAndDeadline[0].trim(), deadlineDate));
             return Stream.concat(commands, newCommand);
         } catch (NoDescriptionException | DateTimeParseException e) {
-            throw new NoDescriptionException();
+            return Stream.concat(commands, Stream.of(new UnknownCommand(CommandType.UNKNOWN)));
         }
     }
 
@@ -228,7 +231,7 @@ public class Parser {
             }
             return Stream.concat(commands, newCommand);
         } catch (NoDescriptionException | DateTimeParseException e) {
-            throw new NoDescriptionException();
+            return Stream.concat(commands, Stream.of(new UnknownCommand(CommandType.UNKNOWN)));
         }
     }
 
@@ -254,7 +257,7 @@ public class Parser {
                     new AddEventCommand(CommandType.EVENT, remainingParts[0].trim(), from, to));
             return Stream.concat(commands, newCommand);
         } catch (NoDescriptionException | DateTimeParseException e) {
-            throw new NoDescriptionException();
+            return Stream.concat(commands, Stream.of(new UnknownCommand(CommandType.UNKNOWN)));
         }
     }
 
@@ -288,7 +291,7 @@ public class Parser {
             }
             return Stream.concat(commands, newCommand);
         } catch (NoDescriptionException | DateTimeParseException e) {
-            throw new NoDescriptionException();
+            return Stream.concat(commands, Stream.of(new UnknownCommand(CommandType.UNKNOWN)));
         }
     }
 
@@ -307,7 +310,7 @@ public class Parser {
             Stream<Command> newCommand = Stream.of(new DeleteTaskCommand(CommandType.DELETE, index));
             return Stream.concat(commands, newCommand);
         } catch (NoDescriptionException e) {
-            throw new NoDescriptionException();
+            return Stream.concat(commands, Stream.of(new UnknownCommand(CommandType.UNKNOWN)));
         }
     }
 
@@ -325,7 +328,26 @@ public class Parser {
             Stream<Command> newCommand = Stream.of(new FindTaskCommand(CommandType.FIND, keyword[1].trim()));
             return Stream.concat(commands, newCommand);
         } catch (NoDescriptionException e) {
-            throw new NoDescriptionException();
+            return Stream.concat(commands, Stream.of(new UnknownCommand(CommandType.UNKNOWN)));
+        }
+    }
+
+    /**
+     * Adds a ScheduleCommand to the list of commands.
+     * @param commands the {@link Stream} of commands to be run
+     * @param description the description of the command
+     * @return the updated {@link Stream} of commands to be run
+     * @throws NoDescriptionException
+     */
+    public static Stream<Command> addScheduleCommand(Stream<Command> commands, String description)
+            throws NoDescriptionException {
+        try {
+            String[] schedule = Parser.separateStringByKeyword(description, "schedule ", true);
+            LocalDate date = LocalDate.parse(schedule[1].trim());
+            Stream<Command> newCommand = Stream.of(new ScheduleCommand(CommandType.SCHEDULE, date));
+            return Stream.concat(commands, newCommand);
+        } catch (NoDescriptionException | DateTimeParseException e) {
+            return Stream.concat(commands, Stream.of(new UnknownCommand(CommandType.UNKNOWN)));
         }
     }
 }

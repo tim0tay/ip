@@ -7,9 +7,9 @@ import java.time.format.DateTimeFormatter;
  * The EventTask class represents a task that spans a period of time.
  */
 public class EventTask extends Task {
-    protected static final String TYPE = "E | ";
-    protected LocalDate from;
-    protected LocalDate to;
+    private static final String TYPE = "E | ";
+    private final LocalDate from;
+    private final LocalDate to;
 
     /**
      * Initialises a newly created EventTask object with a description and a time period.
@@ -21,6 +21,15 @@ public class EventTask extends Task {
         super(description);
         this.from = from;
         this.to = to;
+    }
+
+    /**
+     * Checks if the task is due between the event's duration.
+     * @param date the date to check against
+     */
+    @Override
+    public boolean isDueOn(LocalDate date) {
+        return (this.from.isBefore(date) && this.to.isAfter(date)) || this.from.equals(date) || this.to.equals(date);
     }
 
     /**

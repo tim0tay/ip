@@ -55,7 +55,7 @@ public class Prophet {
                     } catch (InvalidTaskNumberException e) {
                         response.append("Please enter a valid integer!");
                     } catch (NoDescriptionException e) {
-                        response.append(e.getMessage());
+                        response.append("Please enter a valid command.");
                     }
                 });
                 Save.save(Prophet.ui, Prophet.storage);

@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class DeadlineTask extends Task {
 
-    protected static final String TYPE = "D | ";
-    protected LocalDate deadline;
+    private static final String TYPE = "D | ";
+    private final LocalDate deadline;
 
     /**
      * Initialises a newly created DeadlineTask object with a description and a deadline.
@@ -19,6 +19,15 @@ public class DeadlineTask extends Task {
     public DeadlineTask(String description, LocalDate deadline) {
         super(description);
         this.deadline = deadline;
+    }
+
+    /**
+     * Checks if the task is due on the given date.
+     * @param date the date to check against
+     */
+    @Override
+    public boolean isDueOn(LocalDate date) {
+        return this.deadline.equals(date);
     }
 
     /**
