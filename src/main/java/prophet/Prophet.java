@@ -1,9 +1,10 @@
 package prophet;
 
-import java.text.NumberFormat;
-import java.util.ArrayList;
+import java.util.stream.Stream;
 
 import prophet.command.Command;
+import prophet.exception.InvalidTaskNumberException;
+import prophet.exception.NoDescriptionException;
 import prophet.exception.ProphetException;
 import prophet.gui.Ui;
 import prophet.parser.Parser;
@@ -46,11 +47,17 @@ public class Prophet {
     public String getResponse(String input) {
         if (!input.equalsIgnoreCase("bye")) {
             try {
-                ArrayList<Command> command = Parser.parse(input);
+                Stream<Command> command = Parser.parse(input);
                 StringBuilder response = new StringBuilder();
-                for (Command c : command) {
-                    response.append(c.execute(ui, Prophet.storage));
-                }
+                command.forEach(c -> {
+                    try {
+                        response.append(c.execute(ui, Prophet.storage));
+                    } catch (InvalidTaskNumberException e) {
+                        response.append("Please enter a valid integer!");
+                    } catch (NoDescriptionException e) {
+                        response.append(e.getMessage());
+                    }
+                });
                 Save.save(Prophet.ui, Prophet.storage);
                 return response.toString();
             } catch (ProphetException e) {

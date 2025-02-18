@@ -1,5 +1,6 @@
 package prophet.todolist;
 
+import java.util.stream.Stream;
 import java.util.ArrayList;
 import java.util.List;
 import prophet.task.Task;
@@ -9,13 +10,13 @@ import prophet.task.Task;
  */
 public class TodoList {
 
-    private final List<Task> list;
+    private Stream<Task> taskStream;
 
     /**
      * Initialises a newly created TodoList object with an empty list.
      */
     public TodoList() {
-        this.list = new ArrayList<>();
+        this.taskStream = Stream.empty();
     }
 
     /**
@@ -27,8 +28,8 @@ public class TodoList {
         if (newTask == null) {
             return "Please.. don't make me work harder than I have to!\n";
         }
-        this.list.add(newTask);
-        assert !this.list.isEmpty() : "List should never be empty";
+        this.taskStream = Stream.concat(this.taskStream, Stream.of(newTask));
+        // assert this.taskStream.findAny().isPresent() : "List should never be empty";
         return "Task added to list: " + newTask;
     }
 
@@ -38,15 +39,18 @@ public class TodoList {
      */
     public String enumerateList() {
         StringBuilder result = new StringBuilder("Let's see what you have on your plate:\n");
-        for (int i = 0; i < this.list.size(); i++) {
-            result.append(i + 1).append(". ").append(this.list.get(i).toString());
+        int counter =  1;
+        List<Task> taskList = this.taskStream.toList();
+        for (int i = 0; i < taskList.size(); i++) {
+            result.append(i + 1).append(". ").append(taskList.get(i).toString());
         }
-        if (this.list.isEmpty()) {
+        if (taskList.isEmpty()) {
             result.append("So gewd ah.. nothing to do!\n");
         }
-        if (this.list.size() > 4) {
+        if (taskList.size() > 4) {
             result.append("Seems like you have quite a few things to do.. go easy on yourself!\n");
         }
+        this.taskStream = taskList.stream();
         return result.toString();
     }
 
@@ -55,10 +59,12 @@ public class TodoList {
      * @return the string that represents the to-do list
      */
     public String enumerateSaveList() {
+        List<Task> taskList = this.taskStream.toList();
         StringBuilder result = new StringBuilder();
-        for (Task task : this.list) {
+        for (Task task : taskList) {
             result.append(task.toString());
         }
+        this.taskStream = taskList.stream();
         return result.toString();
     }
 
@@ -70,10 +76,12 @@ public class TodoList {
      */
     public String setDone(int taskNumber) throws IndexOutOfBoundsException {
         try {
-            this.list.get(taskNumber).setDone();
+            List<Task> taskList = this.taskStream.toList();
+            taskList.get(taskNumber).setDone();
             StringBuilder result = new StringBuilder("Marked done! Good job.\n");
-            result.append(this.list.get(taskNumber).getStatusIcon())
-                    .append(this.list.get(taskNumber).getTaskDescription()).append("\n");
+            result.append(taskList.get(taskNumber).getStatusIcon())
+                    .append(taskList.get(taskNumber).getTaskDescription()).append("\n");
+            this.taskStream = taskList.stream();
             return result.toString();
         } catch (IndexOutOfBoundsException e) {
             return e.getMessage();
@@ -88,10 +96,12 @@ public class TodoList {
      */
     public String setNotDone(int taskNumber) throws IndexOutOfBoundsException {
         try {
-            this.list.get(taskNumber).setNotDone();
+            List<Task> taskList = this.taskStream.toList();
+            taskList.get(taskNumber).setNotDone();
             StringBuilder result = new StringBuilder("Marked not done! Jiayous...\n");
-            result.append(this.list.get(taskNumber).getStatusIcon())
-                    .append(this.list.get(taskNumber).getTaskDescription()).append("\n");
+            result.append(taskList.get(taskNumber).getStatusIcon())
+                    .append(taskList.get(taskNumber).getTaskDescription()).append("\n");
+            this.taskStream = taskList.stream();
             return result.toString();
         } catch (IndexOutOfBoundsException e) {
             return e.getMessage();
@@ -106,11 +116,13 @@ public class TodoList {
      */
     public String deleteTask(int taskNumber) throws IndexOutOfBoundsException {
         try {
-            Task task = this.list.get(taskNumber);
-            this.list.remove(taskNumber);
+            List<Task> taskList = new ArrayList<>(this.taskStream.toList());
+            Task task = taskList.get(taskNumber);
+            taskList.remove(taskNumber);
             StringBuilder result = new StringBuilder("The following task was deleted: \n");
             result.append(task.getStatusIcon())
                     .append(task.getTaskDescription()).append("\n");
+            this.taskStream = taskList.stream();
             return result.toString();
         } catch (IndexOutOfBoundsException e) {
             return e.getMessage();
@@ -124,11 +136,13 @@ public class TodoList {
      */
     public String findTasks(String keyword) {
         StringBuilder result = new StringBuilder("Here are the tasks that match: " + keyword + "\n");
-        for (Task task : this.list) {
+        List<Task> taskList = this.taskStream.toList();
+        for (Task task : taskList) {
             if (task.getTaskDescription().contains(keyword)) {
                 result.append(task.toString());
             }
         }
+        this.taskStream = taskList.stream();
         return result.toString();
     }
 
@@ -137,6 +151,9 @@ public class TodoList {
      * @return the size of the list
      */
     public int getListSize() {
-        return this.list.size();
+        List<Task> taskList = this.taskStream.toList();
+        int listSize = taskList.size();
+        this.taskStream = taskList.stream();
+        return listSize;
     }
 }

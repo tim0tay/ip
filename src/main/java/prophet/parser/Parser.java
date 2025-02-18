@@ -1,6 +1,6 @@
 package prophet.parser;
 
-import java.util.ArrayList;
+import java.util.stream.Stream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -18,7 +18,6 @@ import prophet.command.MarkNotDoneCommand;
 import prophet.command.UnknownCommand;
 import prophet.exception.InvalidTaskNumberException;
 import prophet.exception.NoDescriptionException;
-import prophet.gui.Ui;
 
 /**
  * The Parser class takes in user input and interprets it to perform the necessary actions.
@@ -30,11 +29,11 @@ public class Parser {
      * @param str the string representing the input
      * @return CommandType the type of command given in the input
      */
-    public static ArrayList<Command> parse(String str)
+    public static Stream<Command> parse(String str)
             throws InvalidTaskNumberException, NoDescriptionException, NumberFormatException {
 
         String firstWord = Parser.separateStringByKeyword(str, " ", false)[0].toLowerCase();
-        ArrayList<Command> commands = new ArrayList<>();
+        Stream<Command> commands = Stream.empty();
 
         switch (firstWord) {
         case "list":
@@ -60,8 +59,8 @@ public class Parser {
         case "find":
             return Parser.addFindCommand(commands, str);
         default:
-            commands.add(new UnknownCommand(CommandType.UNKNOWN));
-            return commands;
+            Stream<Command> unknownCommand = Stream.of(new UnknownCommand(CommandType.UNKNOWN));
+            return Stream.concat(commands, unknownCommand);
         }
     }
 
@@ -86,28 +85,28 @@ public class Parser {
 
     /**
      * Adds a ListCommand to the list of commands.
-     * @param commands the command list to be run
-     * @return the list of commands
+     * @param commands the {@link Stream} of commands to be run
+     * @return the updated {@link Stream} of commands to be run
      */
-    public static ArrayList<Command> addListCommand(ArrayList<Command> commands) {
-        commands.add(new ListCommand(CommandType.LIST));
-        return commands;
+    public static Stream<Command> addListCommand(Stream<Command> commands) {
+        Stream<Command> newCommand = Stream.of(new ListCommand(CommandType.LIST));
+        return Stream.concat(commands, newCommand);
     }
 
     /**
      * Adds a MarkCommand to the list of commands.
-     * @param commands the command list to be run
+     * @param commands the {@link Stream} of commands to be run
      * @param description the description of the command
-     * @return the list of commands
+     * @return the updated {@link Stream} of commands to be run
      * @throws InvalidTaskNumberException
      */
-    public static ArrayList<Command> addMarkCommand(ArrayList<Command> commands, String description)
+    public static Stream<Command> addMarkCommand(Stream<Command> commands, String description)
             throws InvalidTaskNumberException, NumberFormatException {
         try {
             String[] mark = Parser.separateStringByKeyword(description, "mark ", true);
             int index = Integer.parseInt(mark[1]) - 1;
-            commands.add(new MarkCommand(CommandType.MARK, index));
-            return commands;
+            Stream<Command> newCommand = Stream.of(new MarkCommand(CommandType.MARK, index));
+            return Stream.concat(commands, newCommand);
         } catch (NoDescriptionException e) {
             throw new InvalidTaskNumberException();
         }
@@ -115,18 +114,18 @@ public class Parser {
 
     /**
      * Adds a MarkNotDoneCommand to the list of commands.
-     * @param commands the command list to be run
+     * @param commands the {@link Stream} of commands to be run
      * @param description the description of the command
-     * @return the list of commands
+     * @return the updated {@link Stream} of commands to be run
      * @throws InvalidTaskNumberException
      */
-    public static ArrayList<Command> addMarkNotDoneCommand(ArrayList<Command> commands, String description)
+    public static Stream<Command> addMarkNotDoneCommand(Stream<Command> commands, String description)
             throws InvalidTaskNumberException, NumberFormatException {
         try {
             String[] mark = Parser.separateStringByKeyword(description, "unmark ", true);
             int index = Integer.parseInt(mark[1]) - 1;
-            commands.add(new MarkNotDoneCommand(CommandType.UNMARK, index));
-            return commands;
+            Stream<Command> newCommand = Stream.of(new MarkNotDoneCommand(CommandType.UNMARK, index));
+            return Stream.concat(commands, newCommand);
         } catch (NoDescriptionException e) {
             throw new InvalidTaskNumberException();
         }
@@ -134,17 +133,17 @@ public class Parser {
 
     /**
      * Adds an AddToDoCommand to the list of commands.
-     * @param commands the command list to be run
+     * @param commands the {@link Stream} of commands to be run
      * @param description the description of the command
-     * @return the list of commands
+     * @return the updated {@link Stream} of commands to be run
      * @throws NoDescriptionException
      */
-    public static ArrayList<Command> addToDoCommand(ArrayList<Command> commands, String description)
+    public static Stream<Command> addToDoCommand(Stream<Command> commands, String description)
             throws NoDescriptionException {
         try {
             String[] todo = Parser.separateStringByKeyword(description, "todo ", true);
-            commands.add(new AddToDoCommand(CommandType.TODO, todo[1].trim()));
-            return commands;
+            Stream<Command> newCommand = Stream.of(new AddToDoCommand(CommandType.TODO, todo[1].trim()));
+            return Stream.concat(commands, newCommand);
         } catch (NoDescriptionException e) {
             throw new NoDescriptionException();
         }
@@ -152,22 +151,25 @@ public class Parser {
 
     /**
      * Loads a ToDoCommand from storage.
-     * @param commands the command list to be run
+     * @param commands the {@link Stream} of commands to be run
      * @param description the description of the command
-     * @return the list of commands
+     * @return the updated {@link Stream} of commands to be run
      * @throws NoDescriptionException
      */
-    public static ArrayList<Command> loadToDoCommandFromStorage(ArrayList<Command> commands, String description)
+    public static Stream<Command> loadToDoCommandFromStorage(Stream<Command> commands, String description)
             throws NoDescriptionException {
         try {
             String[] todo = Parser.separateStringByKeyword(description, "T \\| ", true);
             String status = todo[1].substring(0, 3);
             String[] statusAndDescription = Parser.separateStringByKeyword(todo[1], "]", true);
-            commands.add(new AddToDoCommand(CommandType.TODO, statusAndDescription[1].trim()));
+            Stream<Command> newCommand = Stream.of(
+                    new AddToDoCommand(CommandType.TODO, statusAndDescription[1].trim()));
             if (status.equals("[X]")) {
-                commands.add(new MarkCommand(CommandType.MARK, Prophet.getStorageSize()));
+                Stream<Command> markCommand = Stream.of(
+                        new MarkCommand(CommandType.MARK, Prophet.getStorageSize()));
+                newCommand = Stream.concat(newCommand, markCommand);
             }
-            return commands;
+            return Stream.concat(commands, newCommand);
         } catch (NoDescriptionException e) {
             throw new NoDescriptionException();
         }
@@ -175,12 +177,12 @@ public class Parser {
 
     /**
      * Adds an AddDeadlineCommand to the list of commands.
-     * @param commands the command list to be run
+     * @param commands the {@link Stream} of commands to be run
      * @param description the description of the command
-     * @return the list of commands
+     * @return the updated {@link Stream} of commands to be run
      * @throws NoDescriptionException
      */
-    public static ArrayList<Command> addDeadlineCommand(ArrayList<Command> commands, String description)
+    public static Stream<Command> addDeadlineCommand(Stream<Command> commands, String description)
             throws NoDescriptionException {
         try {
             String[] deadline = Parser.separateStringByKeyword(description, "deadline ", true);
@@ -189,8 +191,9 @@ public class Parser {
             // formatting the date so that it is readable
             LocalDate deadlineDate = LocalDate.parse(todoAndDeadline[1].trim());
 
-            commands.add(new AddDeadlineCommand(CommandType.DEADLINE, todoAndDeadline[0].trim(), deadlineDate));
-            return commands;
+            Stream<Command> newCommand = Stream.of(
+                    new AddDeadlineCommand(CommandType.DEADLINE, todoAndDeadline[0].trim(), deadlineDate));
+            return Stream.concat(commands, newCommand);
         } catch (NoDescriptionException | DateTimeParseException e) {
             throw new NoDescriptionException();
         }
@@ -198,12 +201,12 @@ public class Parser {
 
     /**
      * Loads a DeadlineCommand from storage.
-     * @param commands the command list to be run
+     * @param commands the {@link Stream} of commands to be run
      * @param description the description of the command
-     * @return the list of commands
+     * @return the updated {@link Stream} of commands to be run
      * @throws NoDescriptionException
      */
-    public static ArrayList<Command> loadDeadlineCommandFromStorage(ArrayList<Command> commands, String description)
+    public static Stream<Command> loadDeadlineCommandFromStorage(Stream<Command> commands, String description)
             throws NoDescriptionException {
         try {
             String[] deadline = Parser.separateStringByKeyword(description, "D \\| ", true);
@@ -216,11 +219,14 @@ public class Parser {
             LocalDate deadlineDate = LocalDate.parse(
                     todoAndDeadline[1].trim(), DateTimeFormatter.ofPattern("MMM dd yyyy"));
 
-            commands.add(new AddDeadlineCommand(CommandType.DEADLINE, todoAndDeadline[0].trim(), deadlineDate));
+            Stream<Command> newCommand = Stream.of(
+                    new AddDeadlineCommand(CommandType.DEADLINE, todoAndDeadline[0].trim(), deadlineDate));
             if (status.equals("[X]")) {
-                commands.add(new MarkCommand(CommandType.MARK, Prophet.getStorageSize()));
+                Stream<Command> markCommand = Stream.of(
+                        new MarkCommand(CommandType.MARK, Prophet.getStorageSize()));
+                newCommand = Stream.concat(newCommand, markCommand);
             }
-            return commands;
+            return Stream.concat(commands, newCommand);
         } catch (NoDescriptionException | DateTimeParseException e) {
             throw new NoDescriptionException();
         }
@@ -228,12 +234,12 @@ public class Parser {
 
     /**
      * Adds an AddEventCommand to the list of commands.
-     * @param commands the command list to be run
+     * @param commands the {@link Stream} of commands to be run
      * @param description the description of the command
-     * @return the list of commands
+     * @return the updated {@link Stream} of commands to be run
      * @throws NoDescriptionException
      */
-    public static ArrayList<Command> addEventCommand(ArrayList<Command> commands, String description)
+    public static Stream<Command> addEventCommand(Stream<Command> commands, String description)
             throws NoDescriptionException {
         try {
             String[] event = Parser.separateStringByKeyword(description, "event ", true);
@@ -244,9 +250,9 @@ public class Parser {
             LocalDate from = LocalDate.parse(timeline[0].trim());
             LocalDate to = LocalDate.parse(timeline[1].trim());
 
-            commands.add(new AddEventCommand(
-                    CommandType.EVENT, remainingParts[0].trim(), from, to));
-            return commands;
+            Stream<Command> newCommand = Stream.of(
+                    new AddEventCommand(CommandType.EVENT, remainingParts[0].trim(), from, to));
+            return Stream.concat(commands, newCommand);
         } catch (NoDescriptionException | DateTimeParseException e) {
             throw new NoDescriptionException();
         }
@@ -254,12 +260,12 @@ public class Parser {
 
     /**
      * Loads an EventCommand from storage.
-     * @param commands the command list to be run
+     * @param commands the {@link Stream} of commands to be run
      * @param description the description of the command
-     * @return the list of commands
+     * @return the updated {@link Stream} of commands to be run
      * @throws NoDescriptionException
      */
-    public static ArrayList<Command> loadEventCommandFromStorage(ArrayList<Command> commands, String description)
+    public static Stream<Command> loadEventCommandFromStorage(Stream<Command> commands, String description)
             throws NoDescriptionException {
         try {
             String[] event = Parser.separateStringByKeyword(description, "E \\| ", true);
@@ -273,12 +279,14 @@ public class Parser {
             LocalDate from = LocalDate.parse(timeline[0].trim(), DateTimeFormatter.ofPattern("MMM dd yyyy"));
             LocalDate to = LocalDate.parse(timeline[1].trim(), DateTimeFormatter.ofPattern("MMM dd yyyy"));
 
-            commands.add(new AddEventCommand(
-                    CommandType.EVENT, remainingParts[0].trim(), from, to));
+            Stream<Command> newCommand = Stream.of(
+                    new AddEventCommand(CommandType.EVENT, remainingParts[0].trim(), from, to));
             if (status.equals("[X]")) {
-                commands.add(new MarkCommand(CommandType.MARK, Prophet.getStorageSize()));
+                Stream<Command> markCommand = Stream.of(
+                        new MarkCommand(CommandType.MARK, Prophet.getStorageSize()));
+                newCommand = Stream.concat(newCommand, markCommand);
             }
-            return commands;
+            return Stream.concat(commands, newCommand);
         } catch (NoDescriptionException | DateTimeParseException e) {
             throw new NoDescriptionException();
         }
@@ -286,37 +294,38 @@ public class Parser {
 
     /**
      * Adds a DeleteTaskCommand to the list of commands.
-     * @param commands the command list to be run
+     * @param commands the {@link Stream} of commands to be run
      * @param description the description of the command
-     * @return the list of commands
+     * @return the updated {@link Stream} of commands to be run
+     * @throws NoDescriptionException, NumberFormatException
      */
-    public static ArrayList<Command> addDeleteCommand(ArrayList<Command> commands, String description)
-            throws NumberFormatException {
+    public static Stream<Command> addDeleteCommand(Stream<Command> commands, String description)
+            throws NoDescriptionException, NumberFormatException {
         try {
             String[] delete = Parser.separateStringByKeyword(description, "delete ", true);
             int index = Integer.parseInt(delete[1]) - 1;
-            commands.add(new DeleteTaskCommand(CommandType.DELETE, index));
-            return commands;
+            Stream<Command> newCommand = Stream.of(new DeleteTaskCommand(CommandType.DELETE, index));
+            return Stream.concat(commands, newCommand);
         } catch (NoDescriptionException e) {
-            commands.add(new UnknownCommand(CommandType.UNKNOWN));
-            return commands;
+            throw new NoDescriptionException();
         }
     }
 
     /**
      * Adds a FindTaskCommand to the list of commands.
-     * @param commands the command list to be run
+     * @param commands the {@link Stream} of commands to be run
      * @param description the description of the command
-     * @return the list of commands
+     * @return the updated {@link Stream} of commands to be run
+     * @throws NoDescriptionException
      */
-    public static ArrayList<Command> addFindCommand(ArrayList<Command> commands, String description) {
+    public static Stream<Command> addFindCommand(Stream<Command> commands, String description)
+            throws NoDescriptionException {
         try {
             String[] keyword = Parser.separateStringByKeyword(description, "find ", true);
-            commands.add(new FindTaskCommand(CommandType.FIND, keyword[1].trim()));
-            return commands;
+            Stream<Command> newCommand = Stream.of(new FindTaskCommand(CommandType.FIND, keyword[1].trim()));
+            return Stream.concat(commands, newCommand);
         } catch (NoDescriptionException e) {
-            commands.add(new UnknownCommand(CommandType.UNKNOWN));
-            return commands;
+            throw new NoDescriptionException();
         }
     }
 }

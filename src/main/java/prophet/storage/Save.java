@@ -3,7 +3,7 @@ package prophet.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.stream.Stream;
 import java.util.Scanner;
 import prophet.command.Command;
 import prophet.exception.InvalidTaskNumberException;
@@ -55,10 +55,14 @@ public class Save {
             Scanner sc = new Scanner(saveFile);
             while (sc.hasNextLine()) {
                 String task = sc.nextLine();
-                ArrayList<Command> loadedCommands = Parser.parse(task);
-                for (Command command : loadedCommands) {
-                    command.execute(ui, storage);
-                }
+                Stream<Command> loadedCommands = Parser.parse(task);
+                loadedCommands.forEach(c -> {
+                    try {
+                        c.execute(ui, storage);
+                    } catch (InvalidTaskNumberException | NoDescriptionException e) {
+                        ui.print("An error occurred while loading the tasks: " + e.getMessage());
+                    }
+                });
             }
         } catch (IOException | InvalidTaskNumberException | NoDescriptionException e) {
             ui.print("An error occurred while loading the tasks: " + e.getMessage());
