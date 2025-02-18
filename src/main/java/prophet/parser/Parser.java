@@ -104,7 +104,7 @@ public class Parser {
      * @throws InvalidTaskNumberException
      */
     public static Stream<Command> addMarkCommand(Stream<Command> commands, String description)
-            throws InvalidTaskNumberException, NumberFormatException {
+            throws NumberFormatException {
         try {
             String[] mark = Parser.separateStringByKeyword(description, "mark ", true);
             int index = Integer.parseInt(mark[1]) - 1;
@@ -123,7 +123,7 @@ public class Parser {
      * @throws InvalidTaskNumberException
      */
     public static Stream<Command> addMarkNotDoneCommand(Stream<Command> commands, String description)
-            throws InvalidTaskNumberException, NumberFormatException {
+            throws NumberFormatException {
         try {
             String[] mark = Parser.separateStringByKeyword(description, "unmark ", true);
             int index = Integer.parseInt(mark[1]) - 1;
@@ -141,8 +141,7 @@ public class Parser {
      * @return the updated {@link Stream} of commands to be run
      * @throws NoDescriptionException
      */
-    public static Stream<Command> addToDoCommand(Stream<Command> commands, String description)
-            throws NoDescriptionException {
+    public static Stream<Command> addToDoCommand(Stream<Command> commands, String description) {
         try {
             String[] todo = Parser.separateStringByKeyword(description, "todo ", true);
             Stream<Command> newCommand = Stream.of(new AddToDoCommand(CommandType.TODO, todo[1].trim()));
@@ -159,8 +158,7 @@ public class Parser {
      * @return the updated {@link Stream} of commands to be run
      * @throws NoDescriptionException
      */
-    public static Stream<Command> loadToDoCommandFromStorage(Stream<Command> commands, String description)
-            throws NoDescriptionException {
+    public static Stream<Command> loadToDoCommandFromStorage(Stream<Command> commands, String description) {
         try {
             String[] todo = Parser.separateStringByKeyword(description, "T \\| ", true);
             String status = todo[1].substring(0, 3);
@@ -185,8 +183,7 @@ public class Parser {
      * @return the updated {@link Stream} of commands to be run
      * @throws NoDescriptionException
      */
-    public static Stream<Command> addDeadlineCommand(Stream<Command> commands, String description)
-            throws NoDescriptionException {
+    public static Stream<Command> addDeadlineCommand(Stream<Command> commands, String description) {
         try {
             String[] deadline = Parser.separateStringByKeyword(description, "deadline ", true);
             String[] todoAndDeadline = Parser.separateStringByKeyword(deadline[1], "/by", true);
@@ -209,8 +206,7 @@ public class Parser {
      * @return the updated {@link Stream} of commands to be run
      * @throws NoDescriptionException
      */
-    public static Stream<Command> loadDeadlineCommandFromStorage(Stream<Command> commands, String description)
-            throws NoDescriptionException {
+    public static Stream<Command> loadDeadlineCommandFromStorage(Stream<Command> commands, String description) {
         try {
             String[] deadline = Parser.separateStringByKeyword(description, "D \\| ", true);
             String status = deadline[1].substring(0, 3);
@@ -242,8 +238,7 @@ public class Parser {
      * @return the updated {@link Stream} of commands to be run
      * @throws NoDescriptionException
      */
-    public static Stream<Command> addEventCommand(Stream<Command> commands, String description)
-            throws NoDescriptionException {
+    public static Stream<Command> addEventCommand(Stream<Command> commands, String description) {
         try {
             String[] event = Parser.separateStringByKeyword(description, "event ", true);
             String[] remainingParts = Parser.separateStringByKeyword(event[1], "/from ", true);
@@ -268,8 +263,7 @@ public class Parser {
      * @return the updated {@link Stream} of commands to be run
      * @throws NoDescriptionException
      */
-    public static Stream<Command> loadEventCommandFromStorage(Stream<Command> commands, String description)
-            throws NoDescriptionException {
+    public static Stream<Command> loadEventCommandFromStorage(Stream<Command> commands, String description) {
         try {
             String[] event = Parser.separateStringByKeyword(description, "E \\| ", true);
             String status = event[1].substring(0, 3);
@@ -303,7 +297,7 @@ public class Parser {
      * @throws NoDescriptionException, NumberFormatException
      */
     public static Stream<Command> addDeleteCommand(Stream<Command> commands, String description)
-            throws NoDescriptionException, NumberFormatException {
+            throws NumberFormatException {
         try {
             String[] delete = Parser.separateStringByKeyword(description, "delete ", true);
             int index = Integer.parseInt(delete[1]) - 1;
@@ -321,8 +315,7 @@ public class Parser {
      * @return the updated {@link Stream} of commands to be run
      * @throws NoDescriptionException
      */
-    public static Stream<Command> addFindCommand(Stream<Command> commands, String description)
-            throws NoDescriptionException {
+    public static Stream<Command> addFindCommand(Stream<Command> commands, String description) {
         try {
             String[] keyword = Parser.separateStringByKeyword(description, "find ", true);
             Stream<Command> newCommand = Stream.of(new FindTaskCommand(CommandType.FIND, keyword[1].trim()));
@@ -339,8 +332,7 @@ public class Parser {
      * @return the updated {@link Stream} of commands to be run
      * @throws NoDescriptionException
      */
-    public static Stream<Command> addScheduleCommand(Stream<Command> commands, String description)
-            throws NoDescriptionException {
+    public static Stream<Command> addScheduleCommand(Stream<Command> commands, String description) {
         try {
             String[] schedule = Parser.separateStringByKeyword(description, "schedule ", true);
             LocalDate date = LocalDate.parse(schedule[1].trim());
