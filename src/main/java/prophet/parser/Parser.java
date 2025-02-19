@@ -101,7 +101,7 @@ public class Parser {
      * @param commands the {@link Stream} of commands to be run
      * @param description the description of the command
      * @return the updated {@link Stream} of commands to be run
-     * @throws InvalidTaskNumberException
+     * @throws NumberFormatException when the task number provided is not an integer
      */
     public static Stream<Command> addMarkCommand(Stream<Command> commands, String description)
             throws NumberFormatException {
@@ -120,7 +120,7 @@ public class Parser {
      * @param commands the {@link Stream} of commands to be run
      * @param description the description of the command
      * @return the updated {@link Stream} of commands to be run
-     * @throws InvalidTaskNumberException
+     * @throws NumberFormatException when the task number provided is not an integer
      */
     public static Stream<Command> addMarkNotDoneCommand(Stream<Command> commands, String description)
             throws NumberFormatException {
@@ -139,7 +139,6 @@ public class Parser {
      * @param commands the {@link Stream} of commands to be run
      * @param description the description of the command
      * @return the updated {@link Stream} of commands to be run
-     * @throws NoDescriptionException
      */
     public static Stream<Command> addToDoCommand(Stream<Command> commands, String description) {
         try {
@@ -156,7 +155,6 @@ public class Parser {
      * @param commands the {@link Stream} of commands to be run
      * @param description the description of the command
      * @return the updated {@link Stream} of commands to be run
-     * @throws NoDescriptionException
      */
     public static Stream<Command> loadToDoCommandFromStorage(Stream<Command> commands, String description) {
         try {
@@ -181,7 +179,6 @@ public class Parser {
      * @param commands the {@link Stream} of commands to be run
      * @param description the description of the command
      * @return the updated {@link Stream} of commands to be run
-     * @throws NoDescriptionException
      */
     public static Stream<Command> addDeadlineCommand(Stream<Command> commands, String description) {
         try {
@@ -204,7 +201,6 @@ public class Parser {
      * @param commands the {@link Stream} of commands to be run
      * @param description the description of the command
      * @return the updated {@link Stream} of commands to be run
-     * @throws NoDescriptionException
      */
     public static Stream<Command> loadDeadlineCommandFromStorage(Stream<Command> commands, String description) {
         try {
@@ -236,7 +232,6 @@ public class Parser {
      * @param commands the {@link Stream} of commands to be run
      * @param description the description of the command
      * @return the updated {@link Stream} of commands to be run
-     * @throws NoDescriptionException
      */
     public static Stream<Command> addEventCommand(Stream<Command> commands, String description) {
         try {
@@ -261,7 +256,6 @@ public class Parser {
      * @param commands the {@link Stream} of commands to be run
      * @param description the description of the command
      * @return the updated {@link Stream} of commands to be run
-     * @throws NoDescriptionException
      */
     public static Stream<Command> loadEventCommandFromStorage(Stream<Command> commands, String description) {
         try {
@@ -294,7 +288,7 @@ public class Parser {
      * @param commands the {@link Stream} of commands to be run
      * @param description the description of the command
      * @return the updated {@link Stream} of commands to be run
-     * @throws NoDescriptionException, NumberFormatException
+     * @throws NumberFormatException when the task number provided is not an integer
      */
     public static Stream<Command> addDeleteCommand(Stream<Command> commands, String description)
             throws NumberFormatException {
@@ -313,7 +307,6 @@ public class Parser {
      * @param commands the {@link Stream} of commands to be run
      * @param description the description of the command
      * @return the updated {@link Stream} of commands to be run
-     * @throws NoDescriptionException
      */
     public static Stream<Command> addFindCommand(Stream<Command> commands, String description) {
         try {
@@ -330,7 +323,6 @@ public class Parser {
      * @param commands the {@link Stream} of commands to be run
      * @param description the description of the command
      * @return the updated {@link Stream} of commands to be run
-     * @throws NoDescriptionException
      */
     public static Stream<Command> addScheduleCommand(Stream<Command> commands, String description) {
         try {
