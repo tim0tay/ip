@@ -64,7 +64,7 @@ public class Save {
                     }
                 });
             }
-        } catch (IOException | InvalidTaskNumberException | NoDescriptionException e) {
+        } catch (IOException | NoDescriptionException e) {
             ui.print("An error occurred while loading the tasks: " + e.getMessage());
         }
     }

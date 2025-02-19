@@ -45,29 +45,27 @@ public class Prophet {
      * @param input the user's chat message
      */
     public String getResponse(String input) {
-        if (!input.equalsIgnoreCase("bye")) {
-            try {
-                Stream<Command> command = Parser.parse(input);
-                StringBuilder response = new StringBuilder();
-                command.forEach(c -> {
-                    try {
-                        response.append(c.execute(ui, Prophet.storage));
-                    } catch (InvalidTaskNumberException e) {
-                        response.append("Please enter a valid integer!");
-                    } catch (NoDescriptionException e) {
-                        response.append("Please enter a valid command.");
-                    }
-                });
-                Save.save(Prophet.ui, Prophet.storage);
-                return response.toString();
-            } catch (ProphetException e) {
-                return e.getMessage();
-            } catch (NumberFormatException e) {
-                return "Please enter a valid integer!";
-            }
-        } else {
+        try {
+            Stream<Command> command = Parser.parse(input);
+            StringBuilder response = new StringBuilder();
+            command.forEach(c -> {
+                try {
+                    response.append(c.execute(ui, Prophet.storage));
+                } catch (InvalidTaskNumberException e) {
+                    response.append("Please enter a valid integer!");
+                } catch (NoDescriptionException e) {
+                    response.append("Please enter a valid command.");
+                }
+            });
             Save.save(Prophet.ui, Prophet.storage);
-            return Ui.greetGoodbye();
+            if (input.equalsIgnoreCase("bye")) {
+                return Ui.greetGoodbye();
+            }
+            return response.toString();
+        } catch (ProphetException e) {
+            return e.getMessage();
+        } catch (NumberFormatException e) {
+            return "Please enter a valid integer!";
         }
     }
 }

@@ -32,7 +32,7 @@ public class Parser {
      * @return CommandType the type of command given in the input
      */
     public static Stream<Command> parse(String str)
-            throws InvalidTaskNumberException, NoDescriptionException, NumberFormatException {
+            throws NoDescriptionException, NumberFormatException {
 
         String firstWord = Parser.separateStringByKeyword(str, " ", false)[0].toLowerCase();
         Stream<Command> commands = Stream.empty();

@@ -41,14 +41,6 @@ public class Ui {
     }
 
     /**
-     * Runs the ui of the chatbot.
-     * @return the string inputted by the user
-     */
-    public String run() {
-        return scanner.nextLine();
-    }
-
-    /**
      * Prints the argument supplied.
      * @param message the message to be printed
      * @return the message to be printed. It is returned to the GUI Main Window
