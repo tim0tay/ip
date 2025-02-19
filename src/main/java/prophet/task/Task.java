@@ -1,13 +1,14 @@
 package prophet.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * The Task class represents a task with a description and a status.
  */
-public class Task {
+public abstract class Task {
 
-    private String description;
+    private final String description;
     private boolean isDone;
 
     /**
@@ -25,6 +26,14 @@ public class Task {
      */
     public boolean isDueOn(LocalDate date) {
         return false;
+    }
+
+    /**
+     * Returns the due date on a task.
+     * For a {@link ToDoTask}, there is no deadline
+     */
+    public LocalDateTime getDueDateTime() {
+        return LocalDateTime.MIN;
     }
 
     /**

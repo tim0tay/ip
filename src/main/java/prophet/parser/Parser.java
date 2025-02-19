@@ -1,9 +1,10 @@
 package prophet.parser;
 
-import java.util.stream.Stream;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.stream.Stream;
 import prophet.Prophet;
 import prophet.command.AddDeadlineCommand;
 import prophet.command.AddEventCommand;
@@ -186,7 +187,7 @@ public class Parser {
             String[] todoAndDeadline = Parser.separateStringByKeyword(deadline[1], "/by", true);
 
             // formatting the date so that it is readable
-            LocalDate deadlineDate = LocalDate.parse(todoAndDeadline[1].trim());
+            LocalDateTime deadlineDate = LocalDateTime.parse(todoAndDeadline[1].trim());
 
             Stream<Command> newCommand = Stream.of(
                     new AddDeadlineCommand(CommandType.DEADLINE, todoAndDeadline[0].trim(), deadlineDate));
@@ -211,8 +212,8 @@ public class Parser {
                     statusAndDescription[1], "by: ", true);
 
             // formatting the date so that it is readable
-            LocalDate deadlineDate = LocalDate.parse(
-                    todoAndDeadline[1].trim(), DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            LocalDateTime deadlineDate = LocalDateTime.parse(
+                    todoAndDeadline[1].trim(), DateTimeFormatter.ofPattern("MMM dd yyyy HHmm"));
 
             Stream<Command> newCommand = Stream.of(
                     new AddDeadlineCommand(CommandType.DEADLINE, todoAndDeadline[0].trim(), deadlineDate));
@@ -240,8 +241,8 @@ public class Parser {
             String[] timeline = Parser.separateStringByKeyword(remainingParts[1], "/to ", true);
 
             // formatting the date so that it is readable
-            LocalDate from = LocalDate.parse(timeline[0].trim());
-            LocalDate to = LocalDate.parse(timeline[1].trim());
+            LocalDateTime from = LocalDateTime.parse(timeline[0].trim());
+            LocalDateTime to = LocalDateTime.parse(timeline[1].trim());
 
             Stream<Command> newCommand = Stream.of(
                     new AddEventCommand(CommandType.EVENT, remainingParts[0].trim(), from, to));
@@ -267,8 +268,10 @@ public class Parser {
             String[] timeline = Parser.separateStringByKeyword(remainingParts[1], "to: ", true);
 
             // formatting the date
-            LocalDate from = LocalDate.parse(timeline[0].trim(), DateTimeFormatter.ofPattern("MMM dd yyyy"));
-            LocalDate to = LocalDate.parse(timeline[1].trim(), DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            LocalDateTime from = LocalDateTime.parse(
+                    timeline[0].trim(), DateTimeFormatter.ofPattern("MMM dd yyyy HHmm"));
+            LocalDateTime to = LocalDateTime.parse(
+                    timeline[1].trim(), DateTimeFormatter.ofPattern("MMM dd yyyy HHmm"));
 
             Stream<Command> newCommand = Stream.of(
                     new AddEventCommand(CommandType.EVENT, remainingParts[0].trim(), from, to));

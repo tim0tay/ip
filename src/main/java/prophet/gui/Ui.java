@@ -27,7 +27,8 @@ public class Ui {
                 + "2. Mark tasks done or not done (keywords are mark or unmark)\n"
                 + "3. List out your tasks (keyword is list)\n"
                 + "4. Delete tasks (keyword is delete)\n"
-                + "5. Find tasks (keyword is find)\n"
+                + "5. Find tasks by name (keyword is find)\n"
+                + "6. See your schedule for a specific day (keyword is schedule)\n"
                 + "What would you like to do?\n");
     }
 

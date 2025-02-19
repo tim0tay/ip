@@ -167,6 +167,7 @@ public class TodoList {
         taskList.stream().filter(
                 c -> c.getClass() == DeadlineTask.class || c.getClass() == EventTask.class)
                          .filter(c -> c.isDueOn(date))
+                         .sorted((a, b) -> a.getDueDateTime().compareTo(b.getDueDateTime()))
                          .forEach(c -> result.append(c.toString()));
         this.taskStream = taskList.stream();
         return result.toString();

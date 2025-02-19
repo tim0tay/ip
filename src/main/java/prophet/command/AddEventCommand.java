@@ -1,6 +1,6 @@
 package prophet.command;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import prophet.gui.Ui;
 import prophet.storage.Storage;
 import prophet.task.EventTask;
@@ -10,8 +10,8 @@ import prophet.task.EventTask;
  */
 public class AddEventCommand extends Command {
     private final String taskDescription;
-    private final LocalDate from;
-    private final LocalDate to;
+    private final LocalDateTime from;
+    private final LocalDateTime to;
 
     /**
      * Initialises a newly created AddEventCommand object.
@@ -20,7 +20,7 @@ public class AddEventCommand extends Command {
      * @param from the start date of the event
      * @param to the end date of the event
      */
-    public AddEventCommand(CommandType type, String taskDescription, LocalDate from, LocalDate to) {
+    public AddEventCommand(CommandType type, String taskDescription, LocalDateTime from, LocalDateTime to) {
         super(type);
         this.taskDescription = taskDescription;
         this.from = from;

@@ -1,6 +1,7 @@
 package prophet.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -8,8 +9,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class EventTask extends Task {
     private static final String TYPE = "E | ";
-    private final LocalDate from;
-    private final LocalDate to;
+    private final LocalDateTime from;
+    private final LocalDateTime to;
 
     /**
      * Initialises a newly created EventTask object with a description and a time period.
@@ -17,7 +18,7 @@ public class EventTask extends Task {
      * @param from the start of the time period
      * @param to the end of the time period
      */
-    public EventTask(String description, LocalDate from, LocalDate to) {
+    public EventTask(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
         this.from = from;
         this.to = to;
@@ -29,7 +30,17 @@ public class EventTask extends Task {
      */
     @Override
     public boolean isDueOn(LocalDate date) {
-        return (this.from.isBefore(date) && this.to.isAfter(date)) || this.from.equals(date) || this.to.equals(date);
+        return (this.from.toLocalDate().isBefore(date) && this.to.toLocalDate().isAfter(date))
+                || this.from.toLocalDate().equals(date) || this.to.toLocalDate().equals(date);
+    }
+
+    /**
+     * Returns the due date on a task.
+     * For a {@link ToDoTask}, there is no deadline
+     */
+    @Override
+    public LocalDateTime getDueDateTime() {
+        return this.to;
     }
 
     /**
@@ -48,7 +59,7 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         return this.getStatusIcon() + super.getTaskDescription()
-                + " from: " + this.from.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
-                + " to: " + this.to.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + "\n";
+                + " from: " + this.from.format(DateTimeFormatter.ofPattern("MMM dd yyyy HHmm"))
+                + " to: " + this.to.format(DateTimeFormatter.ofPattern("MMM dd yyyy HHmm")) + "\n";
     }
 }

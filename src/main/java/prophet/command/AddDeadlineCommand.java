@@ -1,6 +1,6 @@
 package prophet.command;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import prophet.gui.Ui;
 import prophet.storage.Storage;
 import prophet.task.DeadlineTask;
@@ -10,7 +10,7 @@ import prophet.task.DeadlineTask;
  */
 public class AddDeadlineCommand extends Command {
     private final String taskDescription;
-    private final LocalDate deadline;
+    private final LocalDateTime deadline;
 
     /**
      * Initialises a newly created AddDeadlineCommand object.
@@ -18,7 +18,7 @@ public class AddDeadlineCommand extends Command {
      * @param taskDescription the description of the task
      * @param deadline the deadline of the task
      */
-    public AddDeadlineCommand(CommandType type, String taskDescription, LocalDate deadline) {
+    public AddDeadlineCommand(CommandType type, String taskDescription, LocalDateTime deadline) {
         super(type);
         this.taskDescription = taskDescription;
         this.deadline = deadline;

@@ -1,6 +1,7 @@
 package prophet.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -9,14 +10,14 @@ import java.time.format.DateTimeFormatter;
 public class DeadlineTask extends Task {
 
     private static final String TYPE = "D | ";
-    private final LocalDate deadline;
+    private final LocalDateTime deadline;
 
     /**
      * Initialises a newly created DeadlineTask object with a description and a deadline.
      * @param description the description of the task
      * @param deadline the deadline of the task
      */
-    public DeadlineTask(String description, LocalDate deadline) {
+    public DeadlineTask(String description, LocalDateTime deadline) {
         super(description);
         this.deadline = deadline;
     }
@@ -27,7 +28,16 @@ public class DeadlineTask extends Task {
      */
     @Override
     public boolean isDueOn(LocalDate date) {
-        return this.deadline.equals(date);
+        return this.deadline.toLocalDate().equals(date);
+    }
+
+    /**
+     * Returns the due date on a task.
+     * For a {@link ToDoTask}, there is no deadline
+     */
+    @Override
+    public LocalDateTime getDueDateTime() {
+        return this.deadline;
     }
 
     /**
@@ -46,6 +56,6 @@ public class DeadlineTask extends Task {
     @Override
     public String toString() {
         return this.getStatusIcon() + super.getTaskDescription() + " by: "
-                + this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + "\n";
+                + this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy HHmm")) + "\n";
     }
 }
