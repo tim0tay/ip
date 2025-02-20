@@ -2,7 +2,7 @@
 
 ---
 
-![User Interface Demo](https://github.com/tim0tay/ip/tree/master/docs/Ui.png)
+![User Interface Demo](https://github.com/tim0tay/ip/blob/master/docs/Ui.png)
 
 Prophet frees your mind of having to remember things you need to do. It's:
 - text-based
