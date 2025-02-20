@@ -2,7 +2,7 @@
 
 ---
 
-![User Interface Demo](https://github.com/tim0tay/ip/docs/Ui.png)
+![User Interface Demo](https://github.com/tim0tay/ip/tree/master/docs/Ui.png)
 
 Prophet frees your mind of having to remember things you need to do. It's:
 - text-based
@@ -10,10 +10,14 @@ Prophet frees your mind of having to remember things you need to do. It's:
 - ~FAST~ SUPER FAST to use
 
 All you need to do is:
-1. download it from [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D)
-2. double-click it.
-3. add your tasks.
-4. let it manage your tasks for you 😉
+1. download Java 17; either the [Oracle version](https://www.oracle.com/java/technologies/downloads/#java17) or 
+another alternative
+   2. for Mac users, please consider using the Azul JDK 17 version;
+   the tutorial is [here](https://se-education.org/guides/tutorials/javaInstallationMac.html)
+2. download the Prophet JAR file from [here](https://github.com/tim0tay/ip/releases/tag/A-Release)
+3. either double-click it or run `java -jar prophet.jar` in your terminal
+4. add your tasks.
+5. let it manage your tasks for you 😉
 
 And it is **free**!
 
@@ -23,6 +27,7 @@ Features:
 - [ ] Managing events
 - [ ] View your schedule for a specific day
 - [ ] Reminders (coming soon)
+
 ---
 ## Adding Todo Tasks
 
@@ -138,7 +143,7 @@ Prophet will then find all tasks that contain the task name you've keyed in:
 Here are the tasks that match: run
 D | [ ] run by: Feb 19 2025 2359
 ```
-
+---
 ## Viewing Your Schedule on a Particular Day
 
 To view your tasks for any particular day, format your input as such:
