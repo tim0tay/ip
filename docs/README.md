@@ -21,13 +21,6 @@ another alternative
 
 And it is **free**!
 
-Features:
-[ ] Managing tasks
-[ ] Managing deadlines
-[ ] Managing events
-[ ] View your schedule for a specific day
-[ ] Reminders (coming soon)
-
 ---
 ## Adding Todo Tasks
 
