@@ -7,7 +7,7 @@
 Prophet frees your mind of having to remember things you need to do. It's:
 - text-based
 - easy to understand
-- ~FAST~ SUPER FAST to use
+- SUPER FAST to use
 
 All you need to do is:
 1. download Java 17; either the [Oracle version](https://www.oracle.com/java/technologies/downloads/#java17) or 
@@ -22,11 +22,11 @@ another alternative
 And it is **free**!
 
 Features:
-- [ ] Managing tasks
-- [ ] Managing deadlines
-- [ ] Managing events
-- [ ] View your schedule for a specific day
-- [ ] Reminders (coming soon)
+[ ] Managing tasks
+[ ] Managing deadlines
+[ ] Managing events
+[ ] View your schedule for a specific day
+[ ] Reminders (coming soon)
 
 ---
 ## Adding Todo Tasks
