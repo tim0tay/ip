@@ -3,8 +3,9 @@ package prophet.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.stream.Stream;
 import java.util.Scanner;
+import java.util.stream.Stream;
+
 import prophet.command.Command;
 import prophet.exception.InvalidTaskNumberException;
 import prophet.exception.NoDescriptionException;

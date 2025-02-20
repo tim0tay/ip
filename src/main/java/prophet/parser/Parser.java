@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.stream.Stream;
+
 import prophet.Prophet;
 import prophet.command.AddDeadlineCommand;
 import prophet.command.AddEventCommand;
@@ -18,7 +19,6 @@ import prophet.command.MarkCommand;
 import prophet.command.MarkNotDoneCommand;
 import prophet.command.ScheduleCommand;
 import prophet.command.UnknownCommand;
-import prophet.exception.InvalidTaskNumberException;
 import prophet.exception.NoDescriptionException;
 
 /**
@@ -57,7 +57,7 @@ public class Parser {
         case "e":
             return Parser.loadEventCommandFromStorage(commands, str);
         case "delete":
-           return Parser.addDeleteCommand(commands, str);
+            return Parser.addDeleteCommand(commands, str);
         case "find":
             return Parser.addFindCommand(commands, str);
         case "schedule":
@@ -77,7 +77,7 @@ public class Parser {
      * @throws NoDescriptionException when the description provided is incomplete
      */
     public static String[] separateStringByKeyword(String str, String keyword, boolean doChecks)
-            throws NoDescriptionException{
+            throws NoDescriptionException {
         String[] splitString = str.split(keyword, 2);
         if (doChecks) {
             if (splitString.length < 2 || splitString[1].trim().isEmpty()) {

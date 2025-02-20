@@ -1,9 +1,9 @@
 package prophet.todolist;
 
 import java.time.LocalDate;
-import java.util.stream.Stream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import prophet.task.DeadlineTask;
 import prophet.task.EventTask;
@@ -43,7 +43,6 @@ public class TodoList {
      */
     public String enumerateList() {
         StringBuilder result = new StringBuilder("Let's see what you have on your plate:\n");
-        int counter =  1;
         List<Task> taskList = this.taskStream.toList();
         for (int i = 0; i < taskList.size(); i++) {
             result.append(i + 1).append(". ").append(taskList.get(i).toString());
@@ -161,6 +160,11 @@ public class TodoList {
         return listSize;
     }
 
+    /**
+     * Searches through all existing tasks that match the {@link LocalDate} provided
+     * @param date
+     * @return
+     */
     public String findTasksByDate(LocalDate date) {
         StringBuilder result = new StringBuilder("Here are the tasks that are on : " + date + "\n");
         List<Task> taskList = this.taskStream.toList();
